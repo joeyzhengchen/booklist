@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日人文社科新书速递</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #F5F2EB;
+    color: #2C2416;
+    min-height: 100vh;
+  }
+  .hero {
+    background: linear-gradient(135deg, #2C3E50, #4A6A7A);
+    color: #fff;
+    padding: 60px 20px 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 36px; margin-bottom: 8px; letter-spacing: 2px; }
+  .hero p { font-size: 15px; color: #C8C8C3; }
+  .hero .sub { color: #F0D78C; font-size: 13px; letter-spacing: 3px; margin-bottom: 8px; }
+  .container { max-width: 680px; margin: 0 auto; padding: 30px 20px 60px; }
+  .day-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .day-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .day-card .date { font-size: 18px; font-weight: bold; }
+  .day-card .info { font-size: 13px; color: #9B8C7A; margin-top: 2px; }
+  .day-card .arrow { font-size: 20px; color: #C9A96E; }
+  .footer { text-align: center; padding: 40px 20px; color: #9B8C7A; font-size: 13px; line-height: 1.8; }
+  .footer a { color: #8B6914; text-decoration: none; }
+  .stats {
+    display: flex; justify-content: center; gap: 20px;
+    margin: 24px 0;
+  }
+  .stat {
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+  .stat b { color: #F0D78C; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="sub">DAILY BOOKS</div>
+  <h1>人文社科新书速递</h1>
+  <p>豆瓣 · 文学 历史 哲学 社科 文化 艺术 传记</p>
+  <div class="stats" id="hero-stats">
+    <div class="stat">已生成 <b id="count">--</b> 期</div>
+    <div class="stat">每日 12:45 自动更新</div>
+  </div>
+</div>
+
+<div class="container" id="list"></div>
+
+<div class="footer">
+  本页面由每日人文社科新书采集器 v5 自动部署<br>
+  数据来源：<a href="https://book.douban.com">豆瓣网</a> ｜
+  <a href="https://github.com/joeyzhengchen/booklist">GitHub</a>
+</div>
+
+<script>
+(async () => {
+  try {
+    const resp = await fetch('https://api.github.com/repos/joeyzhengchen/booklist/contents/?ref=gh-pages');
+    const files = await resp.json();
+    const days = files
+      .filter(f => f.name.match(/^\d{4}-\d{2}-\d{2}\.html$/))
+      .map(f => ({
+        name: f.name.replace('.html', ''),
+        date: f.name.replace('.html', ''),
+        path: f.name
+      }))
+      .sort((a, b) => b.date.localeCompare(a.date));
+
+    document.getElementById('count').textContent = days.length;
+
+    const list = document.getElementById('list');
+    if (days.length === 0) {
+      list.innerHTML = '<p style="text-align:center;color:#9B8C7A;padding:40px;">暂无书单，敬请期待</p>';
+      return;
+    }
+
+    const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+    days.forEach(d => {
+      const dt = new Date(d.date);
+      const wd = weekdays[dt.getDay()];
+      const today = new Date().toISOString().slice(0,10);
+      const badge = d.date === today ? ' <span style="background:#D44444;color:#fff;font-size:11px;padding:1px 8px;border-radius:8px;">今天</span>' : '';
+      const a = document.createElement('a');
+      a.className = 'day-card';
+      a.href = d.path;
+      a.innerHTML = `
+        <div>
+          <div class="date">${d.date} 星期${wd}${badge}</div>
+          <div class="info">点击查看当日新书与推荐</div>
+        </div>
+        <div class="arrow">→</div>
+      `;
+      list.appendChild(a);
+    });
+  } catch(e) {
+    document.getElementById('list').innerHTML =
+      '<p style="text-align:center;color:#9B8C7A;padding:40px;">加载中...<br><small>首次部署后列表会自动出现</small></p>';
+    document.getElementById('count').textContent = '?';
+  }
+})();
+</script>
+
+</body>
+</html>
