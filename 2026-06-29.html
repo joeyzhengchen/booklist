@@ -51,25 +51,41 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .hero .badge {
     display: inline-block;
     font-size: 11px;
     background: rgba(255,255,255,0.15);
     padding: 3px 10px;
     border-radius: 12px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
   }
   .hero h1 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
-  }
-  .hero .subtitle {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.4;
   }
   .hero .stats-row {
     display: flex;
@@ -321,12 +337,12 @@
 
 <!-- 头部 -->
 <div class="hero">
-  <div class="badge">DAILY BOOKS</div>
-  <h1>人文社科新书速递</h1>
-  <div class="subtitle">
-    2026-06-29 · 豆瓣 7 大分类<br>
-    文学、历史、哲学、社科、文化、艺术、传记
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-06-29</span>
   </div>
+  <h1>人文社科新书速递</h1>
   <div class="stats-row">
     <div class="stat">📚 本月 <em>82</em> 本</div>
     <div class="stat">🆕 新增 <em>10</em> 本</div>
