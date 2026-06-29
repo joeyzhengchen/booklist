@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>人文社科新书速递 · 2026-06-29</title>
+<style>
+  :root {
+    --bg: #f8f5f0;
+    --card: #ffffff;
+    --text: #2c2416;
+    --text2: #6b5e4e;
+    --text3: #9b8c7a;
+    --accent: #c9a96e;
+    --accent2: #8b6914;
+    --new: #d44;
+    --border: #e8e0d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --radius: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+  }
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+  }
+
+  /* --- 头部 --- */
+  .hero {
+    background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
+    color: #fff;
+    padding: 28px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero .badge {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  .hero .subtitle {
+    font-size: 13px;
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+  .hero .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .hero .stat {
+    font-size: 12px;
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hero .stat em {
+    font-style: normal;
+    font-weight: 600;
+    color: #f0d78c;
+  }
+
+  /* --- 分区 --- */
+  .section {
+    padding: 20px 16px 0;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .section-head h3 {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-head .count {
+    font-size: 12px;
+    color: var(--text3);
+    font-weight: 400;
+  }
+
+  /* --- 书籍卡片 --- */
+  .book-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+  .book-card:active { transform: scale(0.985); }
+  .book-card .new-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 10px;
+    background: var(--new);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 8px;
+  }
+  .book-card .cover-wrap {
+    flex-shrink: 0;
+    width: 76px; height: 106px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f0ece6;
+  }
+  .book-card .cover-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .book-card .no-cover {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #ccc; font-size: 10px;
+  }
+  .book-card .info { flex: 1; min-width: 0; }
+  .book-card .info .title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: 70px; /* 避让 "本日新" 徽章 */
+  }
+  .book-card .info .author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .book-card .info .meta {
+    font-size: 11px;
+    color: var(--text3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+  }
+  .book-card .info .meta .sep { color: #d5cec4; }
+  .book-card .info .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #d4a017;
+    font-weight: 500;
+  }
+  .book-card .info .desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .book-card .info .link-row {
+    margin-top: 6px;
+  }
+  .book-card .info .link-row a {
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* --- 推荐卡片 --- */
+  .rec-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    padding: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .rec-card .rec-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .rec-card .rec-title {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .rec-card .rec-tag {
+    font-size: 10px;
+    background: #f0e6d2;
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+  .rec-card .rec-author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+  .rec-card .rec-meta {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .rec-card .rec-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .rec-card .rec-reason {
+    font-size: 12px;
+    color: var(--accent2);
+    background: #fef9e7;
+    padding: 8px 10px;
+    border-radius: 6px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .rec-card .rec-reason span.label {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  /* --- 爱心按钮 --- */
+  .heart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border: 1px solid #e0d0d0;
+    border-radius: 18px;
+    font-size: 13px;
+    color: #999;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .heart-btn:active {
+    border-color: #d44;
+    color: #d44;
+    background: #fef5f5;
+  }
+  .heart-btn .heart { font-size: 16px; }
+
+  /* --- 页脚 --- */
+  .footer {
+    text-align: center;
+    color: var(--text3);
+    font-size: 11px;
+    padding: 24px 16px 8px;
+    line-height: 1.6;
+  }
+
+  /* --- 分隔线 --- */
+  .divider {
+    margin: 8px 16px;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- 头部 -->
+<div class="hero">
+  <div class="badge">DAILY BOOKS</div>
+  <h1>人文社科新书速递</h1>
+  <div class="subtitle">
+    2026-06-29 · 豆瓣 7 大分类<br>
+    文学、历史、哲学、社科、文化、艺术、传记
+  </div>
+  <div class="stats-row">
+    <div class="stat">📚 本月 <em>74</em> 本</div>
+    <div class="stat">🆕 新增 <em>2</em> 本</div>
+    <div class="stat">🌟 推荐 <em>5</em> 本</div>
+  </div>
+</div>
+
+<!-- 本月新书 -->
+<div class="section">
+  <div class="section-head">
+    <h3>📚 本月新书</h3>
+    <span class="count">74 本 · 本月出版</span>
+  </div>
+
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35494612.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">1. 在时间涂改一切之前</div>
+    <div class="author">✍ （希腊）卡瓦菲斯</div>
+    <div class="meta">🏠 人民文学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 79.00<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>你要把伊萨卡铭记在心上。 那是你命定要抵达的地方。 但是，绝不要匆忙加速， 最好能走很多年时间， 这样，当你登上那座岛屿，你已经老去， 满载着一生积累的财富， 而非指望伊萨卡让你富有。 伊萨卡给了你神奇的旅程。 没有她，你就不会去远行。 而现在，她已经没有什么能给你， 如果你发现她的清贫，她并没有骗你。 那时，你早已充满智慧与历练， 一定会明白，你的伊萨卡意味着什么。 ——卡瓦菲斯《伊萨卡》 这本诗集收录了二百余首诗，包括卡瓦菲斯生前发表的全部作品，并精选了一批生前未发表的作品。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38448457/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  <div class="new-badge">本日新</div>
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35526455.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">2. 帝国炼金术：东南亚的民族主义与政治认同</div>
+    <div class="author">✍ [澳] 安东尼·瑞德 (Anthony Reid)</div>
+    <div class="meta">🏠 浙江人民出版社<span class="sep"> · </span>📅 2026-06-01<span class="sep"> · </span>💰 98.00<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>20世纪中叶是亚洲历史上最重要的分水岭之一，一系列帝国殖民地通过革命或非殖民化进程宣告成为民族国家。民族主义犹如伟大的“炼金术士”，将帝国主义统治下如同“废金属”的各殖民地社群重新转化为如同“黄金”的民族国家。在充斥着巨大多样性的亚洲，要实现这样的转变，需要的力量与欧洲从多民族帝国过渡到文化同质国家截然不同。 在本书中，东南亚史学家安东尼·瑞德探索了新政治身份形成的神秘炼金术。他以东南亚为例，检验了当代有关现代性、民族主义和族群认同之间关系的理论。瑞德从欧洲截然不同的民族主义经验中汲取概念，发展出自己的类型学框架，以更好地阐释印度尼西亚人、马来人、华人、亚齐人、巴塔克人和卡达山人等政治身份的形成。在梳理东南亚多元族群身份演变轨迹的同时，为理解东南亚后殖民时代民族国家的构建提供了极具启发性的视角。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37502912/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  <div class="new-badge">本日新</div>
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35521122.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">3. 身体周围的光：勃莱诗精选</div>
+    <div class="author">✍ [美] 罗伯特·勃莱</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 82.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>内容简介】 罗伯特·勃莱是“深度意象派”的主要推动者和代表性诗人。他力图挣脱学院派传统的束缚，将中国古典诗歌、拉美诗歌与欧洲超现实主义诗歌引入美国诗坛，为其注入新的活力。既深入自然与内心风景，又引领我们直视社会的阴影，多重精神传统交织其中，声色斑斓。 本书精选勃莱不同时期的代表性诗作，包括第一部诗集《雪地里的宁静》、获得“美国国家图书奖”的诗集《身体周围的光》、带有中国诗韵的诗集《跳出床外》《睡者手握着手》等，多维度展现勃莱的诗歌世界。 知名翻译家水琴修订，焕新出版。 【名家推荐】 罗伯特·勃莱一生笔耕不辍，已然成为一种具有地质般力量的天才，重塑了诗歌和文化的地貌，使他得以与那些诗歌先驱和无名导师并列——他的诗行，常常在向他们致敬。 ——简·赫斯菲尔德 这些诗作...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37806056/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35510387.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">4. 莫里斯·布朗肖传：不可见的伙伴</div>
+    <div class="author">✍ (法) 克里斯托夫·毕当</div>
+    <div class="meta">🏠 南京大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 136.00<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>○深刻影响萨特、福柯、德里达等一众思想巨匠的莫里斯·布朗肖○ ○极具分量的传记 ○揭开布朗肖的神秘面纱 ----------------------------- 【图书简介】 布朗肖是法国20世纪著名的作家、批评家、哲学家，其思想对萨特、福柯、巴特等法国知识分子产生了深远影响。 作为法语世界最具分量的布朗肖传记，本书的价值和意义毋庸置疑。全书分六个阶段回溯了布朗肖的一生，涉及家庭背景、人生际遇、交游网络、记者生涯、文学创作、情感世界、标志性事件、思想嬗变等各方面的内容，并结合具体的历史事件、思想论争与作品文本，对死亡、写作、中性、黑夜、沉默、孤独、共同体、友谊等布朗肖思想中的重要概念进行了溯源、剖析与阐释，为理解布朗肖的生平、思想及文学创作提供了重要参照。 目前，国内尚无任何其他布朗肖的传记出版，这部重量级传记的出版将有助于专业研究者与普通读者更好...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38382251/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35497269.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">5. 门外：边境、锈带与好莱坞</div>
+    <div class="author">✍ 刘骁骞</div>
+    <div class="meta">🏠 新星出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 49<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.6</span><span style="color:#9b8c7a;font-size:10px"> (168人评价)</span></div>
+    <div class='desc'>“格兰德河对岸，一个墨西哥人对着美国这一侧唱歌。歌声可以穿越国界，人不能。” · ★继《陆上行舟》后，“用命换新闻”的硬核记者刘骁骞，在驻外的第17年，交出崭新代表作！ ★美加墨世界杯前夕，从美国边境到赛场边缘，一份来自北美断层线的炽热足球纪实。这颗球，挑战着身份的边界，串联起那些被拒之门外的人。 “加拿大应该成为美国第51个州。”“我对墨西哥不满意。” 特朗普再次入主白宫，移民墙兴建，关税战重启，北美进入大变局时刻，矛盾愈加尖锐。美加墨世界杯，就在这个时候，如期到来。 世界杯将成为窗口，足球隐喻着身份政治、区域博弈的深层症候。这将是一场在北美大陆断层线上的竞赛。 ★从美国的尽头，到造梦之城，再进入锈掉的内部，三座城，三段不停越界的故事，穿越美国的过去、现在和未来的漫长跋涉。 布朗斯维尔，马斯克的星舰基地即将重新定义这座边境小城，移民、物流、火箭穿过...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38461461/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35497878.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">6. 另一个国度：在20世纪废墟上的漫游</div>
+    <div class="author">✍ 杨潇</div>
+    <div class="meta">🏠 民主与建设出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 88.00元<span class="sep"> · </span>📖 平装 <span class="rating">★ 9.5</span><span style="color:#9b8c7a;font-size:10px"> (92人评价)</span></div>
+    <div class='desc'>★《重走》作者杨潇重磅新作 ★三次德国之行，讲述希望与恐惧的纪实文学 ★“今天我们遇到的许多问题，都是漫长的20世纪的反复回响” ★在漫游中收获力量与韧性，共同创造一个积极的故事 2012年、2019年和2024年，杨潇三次旅居德国，走访了大量与纳粹集中营、战争相关的博物馆、纪念馆，并采访了多位国外研究者、战争亲历者的后代及其他相关人士。过程中，他发现，“记忆”在今天变得越来越重要，它不但关乎过去，更关乎现在与未来。 历时13年，杨潇试着把他的旅行、战后德国的旅行以及观念的旅行融合在一起，讲述一个20世纪的故事。这个故事包括但不限于一些最重要的话题：进步叙事破产了吗？为什么我们喜欢二元对立？失落的身份去何处寻找？言论自由与政治正确怎么平衡？群体性狂热是不可避免的周而复始吗？存在一种健康的民族主义吗？受害者奥林匹克是怎么回事？人性又到底是什么？</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38447083/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35468324.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">7. 作家们毫无进展：珀金斯与海明威、菲茨杰拉德、沃尔夫书信集</div>
+    <div class="author">✍ (美) 马修·J.布鲁科利 / (美) 朱迪丝·S.鲍曼</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 118.00元<span class="sep"> · </span>📖 精装 <span class="rating">★ 9.0</span><span style="color:#9b8c7a;font-size:10px"> (51人评价)</span></div>
+    <div class='desc'>“书是最重要的，其他都无足轻重。” ✒️成为一名编辑 ◉你需要面对： 拖稿、借钱、深夜哭诉、作者约架…… ◉你需要充当： 父亲、挚友、评论家、职业经纪人、借款人、心理咨询师、遗产管理员…… ◉你需要知道： 如何在作者与老板之间进行沟通； 如何在文学与商业之间取得平衡； 如何在被无端指责时仍然心平气和…… ◉以及，最重要的： 如何在遍体鳞伤时也仍旧不改初衷。 ✒️本书收录了传奇编辑珀金斯与他的三大作者——菲茨杰拉德、海明威、沃尔夫——的文学通信，聚焦于写作、出版、作家与出版人的关系等。这些信件不仅揭示了珀金斯如何协助他的作者完成一部部伟大的作品，也展示了他作为“天才的编辑”的伟大特质：承担起责任，让作家们去做只有他们能做到的事。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37843237/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35510757.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">8. 被阻塞的疼痛</div>
+    <div class="author">✍ [匈] 纳道什·彼得 / [匈] 纳达斯·彼得</div>
+    <div class="meta">🏠 上海人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 108.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>• 当代东欧极具影响力的知识分子型作家、与诺奖得主拉斯洛并肩的匈牙利文学巨匠纳道什·彼得40年创作精选集 • 14篇文化随笔×9部短篇小说，回望家庭带来的隐痛，直面个体感受与宏大叙事的冲突，在孤独与焦虑中寻找完整的自我 • “我开始更多地倾听自己的痛苦，没有什么比它更能指 引我。” • 对于想要了解纳道什独特文风的人来说，本书无疑是绝佳的入门。——《纽约书评》 《被阻塞的疼痛》是纳道什·彼得的短篇小说与随笔合集，收录他写于1962年至2000年间的23篇作品，既有抒发政治见解、个人回忆、哲学思考的非虚构随笔及文学评论，又有构思精妙的虚构小说，所涉主题非常广泛，展现了纳道什作为小说家与公共知识分子的双重面貌。《盛大的圣诞杀戮》《火与知识的故事》《我们可怜的可怜的萨斯·安德森》《寄生体系》《浑浊的表象之源》《世界公民与公山羊》等探讨欧洲政治、匈牙利时局，...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37928834/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35527540.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">9. 纸上孤岛：他们的人生与日记</div>
+    <div class="author">✍ [法] 尼古拉斯·马莱斯 / [法] 索菲·普雅斯</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 188.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>有些秘密，只写给纸看。 弗吉尼亚·伍尔夫觉得自己是一个失败者； 60岁的伯努瓦特·格鲁用新鲜的爱情战胜衰老的阴影； 玛丽·居里用泪痕诀别挚爱。 …… 他们以为这些文字将永远属于抽屉深处。如今，它们被唤醒了。 215份来自珍本书商的绝密档案首次公开出版 没有美化和矫饰，只呈现手稿最原始的温度 ——那些涂改、泪痕、加密符号，以及再也写不下去的空白 86位历史名人的私家日记 + 诺贝尔文学奖得主安妮·埃尔诺独家专访</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38178854/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35516740.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">10. 请回答，韩国文学</div>
+    <div class="author">✍ 薛舟</div>
+    <div class="meta">🏠 人民文学出版社<span class="sep"> · </span>📅 2026-06-15<span class="sep"> · </span>💰 52.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>+《世界文学》原主编 高兴： 薛舟讲韩国文学，依凭艺术敏感和文学积累，结合历史背景和文化氛围，还时常融入人生经验和心灵感悟，同时又紧贴代表作家和典型文本，既有宏观把握，又有微观呈现，既有个人思索，又有作品评析，既有展开的面，又有深入的点，可谓纵横交错，点面相宜，脉络清晰。薛舟讲韩国文学，不玩深沉，拒绝花哨，不求面面俱到，只求实实在在，真真切切，只求每个字、每句话，都经过自己眼睛和头脑的消化、过滤和理解。薛舟讲韩国文学，正如他的为人，诚恳，质朴，赤子般纯真。薛舟如是讲韩国文学，必定是明白的，是亲切的，是丰富的，是感人的，是有肌理、有诗意、有温度、有生机和活力的。 我还要强调一下薛舟作家、诗人、译家和学者的多重身份。正是这多重身份给了他足够的底气、武艺和能量。 +薛舟： 这部文集记录了我对韩国文学二十多年来的观察和思考，希望能为读者提供小小的注脚，方便...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38494403/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35419583.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">11. 夜</div>
+    <div class="author">✍ [加] 安妮·卡森</div>
+    <div class="meta">🏠 文汇出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 358.00元<span class="sep"> · </span>📖 精装 <span class="rating">★ 8.3</span><span style="color:#9b8c7a;font-size:10px"> (75人评价)</span></div>
+    <div class='desc'>【已有现货】可于淘宝或小红书搜索购买 ****** “在世诸天才之一” 古典造诣深厚的当代诗人 安妮·卡森最复杂幽深的代表作 艾丽斯·门罗、韩江惊叹推荐 简体中文完全复刻 ****** 一部无法定义的神秘“盒中书” 一套26米长纸折成的风琴册 一件关于血脉之情的艺术装置 一部私人历史的词典 一首与卡图卢斯的兄弟悼亡诗构成 复调的挽歌 ***** “ 历史和挽歌是近亲。” ——安妮·卡森 《夜》是一盒诗集，也是一块安妮·卡森献给哥哥的迷你墓碑。它以手账的形式，将家书、老照片、速写画、词条与散文诗拼贴在一起，构成一部可触碰的元挽歌。贯穿全书的暗线，是卡森对古罗马诗人卡图卢斯（Catullus）的《第101首诗》的翻译——一首献给亡兄的挽歌。卡图卢斯的兄长与卡森的哥哥，在命运中有诸多暗合。《夜》的每个段落都对应着《第101首诗》中的一个拉丁词，从“Mult...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38180393/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35527515.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">12. 方块字与山水诗</div>
+    <div class="author">✍ 萧驰</div>
+    <div class="meta">🏠 生活·读书·新知三联书店<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 68.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>借汉语言学之透镜，深度追问中国诗学如何从汉语的土壤中发育与演变。 萧驰教授遗著，系统解码中国古典诗学与民族精神的深度共鸣。 诗并非规则的堆砌，而是像生命一样，从汉语独特的语言系统中自然“长出来”的。 中国古典诗学并非零散的技法，而是一个由汉语造就的生命系统。萧驰教授以语言学为透镜，大胆揭示了“兴”、“对仗”与“山水”等核心观念是如何从汉语独特的词语、句式中自然“长”出来的。对于希望跳出传统意境解析、从底层逻辑理解中国诗歌独特魅力的读者，这无疑是一本打破认知边界的必读之作。 萧驰教授虽身在海外，却始终魂牵祖国的山河大地与古典文本，他曾直言：“我研究的是高尚的东西”。本书不仅是他三十年诗学研究的终极总结，更是一次关于中国文化思维方式的深情告白。在这一场“冒险的尝试”中，我们能看到一位学者如何打破常规，从最基础的语言根部，重新丈量中国诗学的生成路径。 --...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37523841/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35520965.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">13. 为父则刚</div>
+    <div class="author">✍ 杨雨坤 著</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 52<span class="sep"> · </span>📖 平装 <span class="rating">★ 9.2</span><span style="color:#9b8c7a;font-size:10px"> (362人评价)</span></div>
+    <div class='desc'>内容简介】 全网追更的“爸爸哥”杨雨坤是一名计算神经科学博士，因为种种意外开启了独自在异国一边带娃、一边读博的极限生活。他在论文和尿布之间狼狈穿行，在“母婴室”的门外手足无措，在笑泪横飞、狼狈又温情的带娃日常里，开启了一场颠覆传统的育儿革命。他成了育儿赛道里的异类，无数人疑惑妈妈去哪了，他很无奈也很烦躁——“我从没见过哪个妈妈带孩子的视频下，有人去问：‘孩子爸爸呢？’” ———————— ✨</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38491107/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35510718.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">14. 摇落</div>
+    <div class="author">✍ 邓安庆</div>
+    <div class="meta">🏠 人民文学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 53.00元 <span class="rating">★ 8.3</span><span style="color:#9b8c7a;font-size:10px"> (40人评价)</span></div>
+    <div class='desc'>《摇落》是作家邓安庆最新中短篇小说集。全书分为“摇”“落”两卷：上卷“摇”以孩童时期的“我”为视角，铺展20世纪末乡村的裂变图景，记录乡人命运的悄然转折；下卷“落”则以成年后的“我”回望，书写相关人物历经人生抉择后，在时代变迁中命运的遭际与终局。 上下两卷相互映照，不同篇目间的人物命运彼此缠绕交织，共同织就三十年间“邓垸”的人生百态与乡村群像：有人固守故土，有人远走他乡，有人在命运漩涡中奋力抗争，也有人随波逐流……他们的笑与泪、聚与散、生或死，成长、离散与回归，犹如献给平凡生命的一曲挽歌，在循环往复中与我们同频共振、引发共鸣。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38487886/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35529321.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">15. 三十岁</div>
+    <div class="author">✍ [奥]英格博格·巴赫曼</div>
+    <div class="meta">🏠 上海文艺出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 60.00元<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.5</span><span style="color:#9b8c7a;font-size:10px"> (33人评价)</span></div>
+    <div class='desc'>“奥地利文学传奇”英格博格・巴赫曼诗意跨界小说标志性作品，战后德语现代文学的里程碑之作，既是其从诗歌转向小说创作的首作，也是德语文学难以复刻的心灵独白。 收录七个短篇，以 “三十岁” 为精神坐标，关注现代个人的内心风暴：战后的废墟之上，年轻人试图重建自我；而立之年的男人被回忆的潮水淹没；爱情中的双方永远无法真正抵达彼此。巴赫曼以诗人的敏感与哲学家的锐利，在日常瞬间探寻存在的意义，探讨爱、孤独、语言、权力与救赎。 《三十岁》不仅是一本短篇小说集，更是一场关于“谁”的追问——在语言失效、身份碎裂的时代，一个人如何确认自己仍然存在。 ———— 名家推荐 在她习以为常的紧张背后，隐藏着...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38405849/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35431405.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">16. 镜中的自我：论现代人的自恋</div>
+    <div class="author">✍ [英]西蒙·布莱克本</div>
+    <div class="meta">🏠 上海文艺出版社<span class="sep"> · </span>📅 2026-06-01<span class="sep"> · </span>💰 68.00元<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.5</span><span style="color:#9b8c7a;font-size:10px"> (25人评价)</span></div>
+    <div class='desc'>⭐为什么社会上的大部分财富会集中在少数人手里？ ⭐为什么我们对幸福的追求常常得不到满足还事与愿违？ ⭐对自爱的强调什么时候会滑向对他人的无视和盲目的自恋？ “英语世界最杰出的哲学家之一”西蒙·布莱克本在这本书中借助大量案例和文学文本的分析，以其哲学家特有的审慎和机智，帮我们分辨什么是健康的自爱，以及自信与贪婪、正直与本真性之间的界限。 -------------------------------- ※ 哲学家A.C.格雷林、帕特里夏·S.丘奇兰德、蕾·兰顿 力荐 ※ 浙江大学哲学教授 徐向东 作序推荐 --------------------------------------- &quot;凭借其标志性的清晰、明晰与通俗易懂，布莱克本就一个极为重要却鲜少被探索的伦理领域，为我们带来了一系列非凡的洞见。这是重要而富有独创性的哲学，完成得十分出色。&quot; ——A....</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38370481/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35435340.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">17. 乘着小船出发</div>
+    <div class="author">✍ [加] 米歇尔·拉巴利亚蒂</div>
+    <div class="meta">🏠 四川美术出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 68.00元<span class="sep"> · </span>📖 平装 <span class="rating">★ 9.0</span><span style="color:#9b8c7a;font-size:10px"> (119人评价)</span></div>
+    <div class='desc'>年过三十的保罗是一名小有成就的平面设计师。工作趋于稳定，妻子露西也怀了宝宝，除了日常生活中偶尔的小烦恼，他已经逐渐适应了真正的成年生活。正值七月中旬，正是离开城市、去湖边钓鱼的好时机。 漫长而慵懒的假期中，保罗的思绪渐渐飘远。他从渔场上形形色色的人物，一路溯回童年的深处。 叛逆的青春期、塑造他家庭观念的往事，以及关于人生、责任与亲密关系的种种困惑，这些被日常生活掩盖的问题，也在静谧的湖水与时间的流动中重新浮现。 平静的水面，终被现实的琐碎与烦扰打破。他渐渐意识到，看似安稳的人生背后，也隐藏着促使人重新审视自我与生活的时刻。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38364431/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35511060.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">18. 奇异的解剖</div>
+    <div class="author">✍ 爱丽丝·罗伯茨</div>
+    <div class="meta">🏠 湖南科学技术出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 89<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>⭐️ 爱自己，从认识自己的身体开始 ※ 身体是我们最为亲密，但往往也是最为陌生的存在。我们对它有太多的疑问与好奇：人体内竟然有马尾？半月板真的没有用吗？ ⭐️ 在身体里展开一场美妙有趣的探索之旅 ※ 小时候总担心误吞下的西瓜子会在体内生根发芽，长大了却发现小脑里就有一棵“活树” ※ 观鸟不必远行，毕竟人体内就有“渡鸦”“鸡冠”“鹅足” ⭐️ 解剖人体结构的名称，难记的解剖学术语也能如此鲜活有趣 ※ 肌肉muscle的拉丁语词源竟然指小老鼠？ ⭐️ 奇异又美丽的解剖学手账 ※ 解剖学知识+文化典故+语言学溯源+幽默+想象力 ⭐️ 装帧精美 ※ 超感纸四色印刷，还原绚丽色彩，方脊精装，随书附赠透卡书签 ———————— 人体的每一部分都有名字和故事，可惜其中大部分都鲜为人知。本书从那些我们或许熟悉，或许陌生的名称出发，探索神秘的人体世界，揭开我们体内那些...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38455695/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35511234.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">19. 沉默：所有问题之源</div>
+    <div class="author">✍ [美] 丽贝卡·索尔尼特</div>
+    <div class="meta">🏠 上海三联书店<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 58<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>“沉默是无人问津、无法言说、 被压抑、被抹去、被忽视之人汇聚而成的海洋…… 妇女权利的历史就是沉默和打破沉默的历史。”——索尔尼特 🗣️ 以言说的力量塑造社会，向世界讲述女性的故事，改变世界对待女性的方式。 🫢 从就业歧视到被默许的性犯罪，揭露沉默文化对女性的所有伤害。 ✒️ 《爱说教的男人》作者最新力作，《纽约客》《柯克斯书评》《出版商周刊》盛赞，简中首度出版 在这部彰显胆识的新作中，女性主义作家、学者索尔尼特延续了她标志性的风格，结合辛辣的幽默、敏锐的分析和有力的洞见，深挖当代社会中与性别有关的种种现象：不愿失声的女性、厌女的暴力、文学经典中脆弱的男性气质、性别二元论、强奸笑话的近期历史…… 索尔尼特在本书中重点论述了言说的力量——谁能说话、说什么，决定了一个社会如何理解自身以及对其成员的期望。《沉默：所有问题之源》提出了这样一个论点：向世界讲述...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38412877/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/l/public/s35483641.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">20. 阁楼</div>
+    <div class="author">✍ [奥]玛尔伦·豪斯霍费尔</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06 <span class="rating">★ 9</span><span style="color:#9b8c7a;font-size:10px"> ((114人))</span></div>
+    <div class='desc'>⭕ 在阁楼，我重新书写自己的存在。 ⭕诺奖得主多丽丝·莱辛、埃尔夫丽德·耶利内克，《小说机杼》作者詹姆斯·伍德，朋克教母帕蒂·史密斯一致推崇。 战后奥地利文学三大女作家之一，《隐墙》作者玛尔伦·豪斯霍费尔生前最后一部长篇小说，中文版首次译介。 一部发生在阁楼、起居室 与 地下室之间的小说， 一段重新书写自己存在的心灵之旅。 “隐墙”的一切，在此早已埋下伏笔。 ⭕ “玛尔伦·豪斯霍费尔的作品直指人类存在的本质。”</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38442636/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/l/public/s35485966.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">21. 其中一个是谎言</div>
+    <div class="author">✍ [韩] 金爱烂</div>
+    <div class="meta">🏠 国文出版社<span class="sep"> · </span>📅 2026-06-15 <span class="rating">★ 7.2</span><span style="color:#9b8c7a;font-size:10px"> ((845人))</span></div>
+    <div class='desc'>为了活下去，我们用谎言保护天真。 “年轻的大师”金爱烂，暌违13年长篇力作 韩国大型线上书店Yes24、阿拉丁 2024年度图书 即使今天的你也伤痕累累， 但依然有人，因为你而活过了今天。 ❅❅❅❅❅❅❅ 这是那些从未被选中的人的故事。 那些从未有机会成为主角的，大部分人的一生。 智宇唯一的家人是只蜥蜴，唯一擅长的，是把说不出口的话画成漫画。 采云曾是足球选手，如今只想向父亲复仇。 素莉不再握任何人的手——因为她握住的人，总会离开。 他们不是英雄，没有天赋，没有被选中的命运。 只是都在十几岁时便懂得：贫穷不是不便，是耻辱；不被爱不是偶然，是日常。 三个从未交谈的孩子，被一个游戏、一部漫画、一只狗，牵引至同一处。 靠彼此的秘密，认出了彼此身上形状相同的空洞。 以一个秘密保护另一个秘密，以谎言保护自己的天真。 他们从未成为主角，却意外地成为某个人生命里，...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38219662/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/l/public/s35521909.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">22. 间奏曲</div>
+    <div class="author">✍ [爱尔兰] 萨莉·鲁尼</div>
+    <div class="meta">🏠 上海译文出版社<span class="sep"> · </span>📅 2026-06-15 <span class="rating">★ 7.5</span><span style="color:#9b8c7a;font-size:10px"> ((164人))</span></div>
+    <div class='desc'>爱尔兰现象级作家 萨莉·鲁尼 最新长篇 在至亲离开后，凝思我们的亲密与失去 “生活究竟可以容纳多少， 可以在不破碎的情况下接收多少” …… 《间奏曲》讲述了一对兄弟在丧父后几周内的情感湍流。 除了是兄弟之外，彼得和埃文几乎没有相似之处。哥哥彼得是一名年轻有为的人权律师，正在与女大学生娜奥米交往。他在经济上帮助她，也清楚她靠情色照片赚钱的事实。同时，他仍将前女友、大学教师西尔维娅视为自己的避风港。弟弟埃文是曾被寄予厚望的国际象棋棋手。不善交际的他在艺术中心的棋赛上遇见了比他年长的项目经理玛格丽特。在父亲去世留下的空洞周围，他们的生活迅速地交织在一起。 这是一段新的插曲，一个充满欲望、绝望和可能性的时期。他们终将知道，生活究竟能容纳多少东西而不破碎。 ♟️ 为浪漫故事而来，为生命的意义驻足。——《爱尔兰时报》 对人性有如此深刻的了解，以至于她的小说几乎像...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38368931/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/l/public/s35529396.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">23. 水在水中</div>
+    <div class="author">✍ 于一爽</div>
+    <div class="meta">🏠 中国工人出版社<span class="sep"> · </span>📅 2026-06-01 <span class="rating">★ 9.1</span><span style="color:#9b8c7a;font-size:10px"> ((23人))</span></div>
+    <div class='desc'>【《十月》青年作家奖、“紫金·人民文学之星”中篇小说奖得主】 *我并不觉得虚弱是一种不幸…… *四篇互文交织的短篇，构筑起一场女性视角的精神共振。四组人物在婚姻的褶皱、死亡的倒影、创作的迷思中，追问存在的本质，践行着 “水在水中” 的生存哲思 —— 没有因果的预设，没有对错的执念，只有瞬间生灭的真实与温柔。 *于一爽的文字如水中倒影，将哲学追问藏进日常肌理。她写生命的脆弱与坚韧，写关系的疏离与联结，写现代人在怀疑与苦难中对精神性的执着追寻。“水在水中” 既是生活的隐喻 —— 消融边界、接纳混沌、回归本真，也是存在的答案：人微不足道，却能在爱与责任中，为所有罪孽与苦难负责。 青年作家于一爽中短篇小说集，四篇互文相连的故事，以四位女性的生命切面为核心，剖开当代女性在婚姻、情感、自我与日常里的隐秘困境与精神挣扎。她们在亲密关系里失语、在生育与失去中阵痛、在...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38487576/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/l/public/s35474400.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">24. 节果决明</div>
+    <div class="author">✍ 程皎旸</div>
+    <div class="meta">🏠 中国工人出版社<span class="sep"> · </span>📅 2026-06</div>
+    <div class='desc'>内容简介】 青年作家程皎旸最新作品。六篇故事，六个把守已久的内心秘事 。程皎旸聚焦都市中的年轻女性，凝视她们的内心惶惑，和有关爱与失去的思考，以细腻且迷醉的动人情节，揭示曾无限接近的心灵真相。 程皎旸不囿于香港叙事的野心之作，以城市书写为肌理，谱出一段段有关时间、有关你我的都市曼波。 #关于书名 “节果决明”是中环一棵百年古树，是中国香港极具代表性的城市景观之一。生长于城市深处，沉默地见证时间。 在本书中，“节果决明”是一段情感的印证，也是一种修辞。 《节果决明》在都市的浮光掠影与人心的幽深旷野之间，以冷静而锋利的笔触，捕捉现代灵魂的漂泊与回响。六个故...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38432188/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/l/public/s35492624.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">25. 我城</div>
+    <div class="author">✍ 西西</div>
+    <div class="meta">🏠 湖南文艺出版社<span class="sep"> · </span>📅 2026-06 <span class="rating">★ 8.7</span><span style="color:#9b8c7a;font-size:10px"> ((32人))</span></div>
+    <div class='desc'>——编辑推荐———— 🍅她建造了一座独树一帜的城，也是所有人生行旅者的“我城”。 “我挚爱的、又美丽又丑陋的城”，西西在上世纪70年代透过本书发出的这声慨叹，至今仍回响在无数城市过客的心中。半个世纪后，关于自我与归属的迷思仍未消散，而答案或许就藏在这座虚构又真实的城里。 🍅「顽童体」独创之作——华语文学只此一家的叙事美学。 将写实与魔幻的笔触、小说与童话的文体糅合，用孩子般的眼光，成就了一种充满游戏精神的文学实验。把孩子的任性天真带入写作，是西西创造的名为“童话现实主义”的生存哲学——以“一点也不晓得”的态度，反而理解了这个让人迷茫的世界。 🍅以一部小说定义了一座城，开创香港本土城市文学先河。 “香港原不以文学知名，但因为西西，文学足以成为香港的骄傲。”（王德威）莫言、余华、王安忆、梁文道、许子东等两岸三地作家学者联袂推荐；1999年入选《亚洲周刊》...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37523953/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/l/public/s35526328.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">26. 雨的历史</div>
+    <div class="author">✍ [爱尔兰] 尼尔·威廉斯</div>
+    <div class="meta">🏠 浙江文艺出版社<span class="sep"> · </span>📅 2026-06 <span class="rating">★ 8.6</span><span style="color:#9b8c7a;font-size:10px"> ((43人))</span></div>
+    <div class='desc'>内容简介】 十九岁的露丝·斯温卧病在床，阁楼的窗外雨声连绵。她身患难以名状的疾病，大学只上了半年便不得不回家休养。父亲维吉尔曾是一位怀揣伟大抱负的诗人，却在贫困与失意中耗尽了自己；爷爷亚伯拉罕是一位传奇的鲑鱼猎手，一生都在与香农河的激流较劲。三代斯温家男人的故事，通过这个卧床的女孩缓缓流出。露丝的床头堆满了父亲留下的藏书，那是他送给她的遗产。她一本一本地读下去，在文字里寻找父亲的影子，也寻找活下去的意义。小说以她阁楼里的独白为主线，以饱含诗意的语言，将爱尔兰西部的自然风土、神话传说、家族血脉与对文学的深沉热爱融为一体。雨，流贯全书。它是...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37668036/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/l/public/s35498320.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">27. 朱砂掌</div>
+    <div class="author">✍ 郑执</div>
+    <div class="meta">🏠 新星出版社<span class="sep"> · </span>📅 2026-06 <span class="rating">★ 7.5</span><span style="color:#9b8c7a;font-size:10px"> ((289人))</span></div>
+    <div class='desc'>《仙症》之后暌违六年 郑执全新长篇小说 · 那一年她65岁，徒手拍碎一个青壮年的颅骨。 “只要一直有话说，就不会想死。我现在还不能死，你也不能。” ·</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37407955/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/l/public/s35504236.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">28. 深海之妻</div>
+    <div class="author">✍ [英] 朱莉娅·阿姆菲尔德 (Julia Armfield)</div>
+    <div class="meta">🏠 广东旅游出版社<span class="sep"> · </span>📅 2026-06 <span class="rating">★ 7.8</span><span style="color:#9b8c7a;font-size:10px"> ((14人))</span></div>
+    <div class='desc'>利娅离开了我，去执行一趟深海任务，为期三周。 她去了六个月，音讯全无。我还以为我永远失去了她。直到有一天，她回来了，但回来的又并不是她。 没有人告诉我在那艘潜艇里发生了什么，也没有人告诉我她们在深海中看到了什么。但不管那是什么东西，利娅都把它的一部分带回来了，带回到了干燥的陆地上，带回到了我们共享的、名为“家”的空间里。 我试图假装一切都好，一切如常。哪怕利娅总是莫名地流血，莫名地褪皮，莫名地忍受不了一切触碰。我开始意识到，我们之前拥有的生活可能已经消失了。虽然利娅还在这里，但那个我爱的女人已经被夺走了，被深海的某个东西夺走了。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37426417/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/l/public/s35483642.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">29. 杀死施特拉</div>
+    <div class="author">✍ [奥]玛尔伦·豪斯霍费尔</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06 <span class="rating">★ 8.7</span><span style="color:#9b8c7a;font-size:10px"> ((107人))</span></div>
+    <div class='desc'>⭕ 比末日更漫长的，是家庭生活。“我们装作爱着彼此，但是知道自己别无选择。” ⭕战后奥地利文学三大女作家之一，《隐墙》作者玛尔伦·豪斯霍费尔中短篇小说杰作选，中文版首次引进。 收录《杀死施特拉》《第五年》《可怕的忠诚》等11篇代表作, 以精悍篇幅，开启通往豪斯霍费尔文学 世界的最佳入口。 《每日镜报》《纽约时报》《华盛顿邮报》《书单》重磅推荐， ⭕“冰水浸浴般的文学体验，令人震惊，也令人清醒”。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38442647/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/l/public/s35503033.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">30. 亲爱的阿贝贝</div>
+    <div class="author">✍ 巨龙蛋壳</div>
+    <div class="meta">🏠 北京联合出版社<span class="sep"> · </span>📅 2026-06</div>
+    <div class='desc'>✨世界催你长大，阿贝贝让你做回片刻小孩 🎈“可爱制造者”巨龙蛋壳送给当代年轻人的可爱之作 🫧用可爱打败一切不可爱！ 小红书人气插画师葱葱封面绘图 ⠂⠄⠄⠂⠁⠁⠂⠄⠄⠂⠁⠁⠂⠄⠄⠂ ⠂⠄⠂✩ 🩷萌商极高的破镜重圆“小甜饼” ——可爱到冒泡的“狗兔CP”爱情故事 失意治愈漫画家江唯一，曾一夜爆红，又很快跌落神坛，再也画不出治愈漫画。直到ABB公司招募“阿贝贝”系列故事治愈漫画师，她边缘性入围，入选可能性极小。江唯一决定抓住这0.01的机会，每天去ABB总公司门口围堵身份显赫的老板商与，积极自我推荐，送咖啡、送伞、送便当……商与屡屡拒绝却屡禁不止。 终有一天，他忍无可忍，淡淡地问： “你一点儿都不记得我们是发誓此生再见是狗的前任了是吧？” 江唯一： “忘忘忘（汪汪汪~）” 🩷给读者的温暖抱抱书 ——以温暖治愈的故事，一直一直抱着你 本书治愈当下年轻人各类精...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38468703/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/l/public/s35510682.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">31. 分时度假</div>
+    <div class="author">✍ [美] 杰弗里·尤金尼德斯</div>
+    <div class="meta">🏠 上海译文出版社<span class="sep"> · </span>📅 2026-06</div>
+    <div class='desc'>本书是尤金尼德斯继普利策奖获奖作品《中性》之后推出的一部短篇小说集，集结了作者发表于《纽约客》《耶鲁评论》等报刊上的短篇小说共十篇。作品以现实视角聚焦老后破产、女性互助养老、生育焦虑、地产泡沫、学术不端等当下热点，探索高学历群体如何尝试不同的方案解决人生问题，塑造了一组活在中产阶级的邋遢不堪中的现代人群像。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38445518/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/l/public/s35505314.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">32. 热带黄昏</div>
+    <div class="author">✍ [阿根廷] 曼努埃尔·普伊格</div>
+    <div class="meta">🏠 作家出版社<span class="sep"> · </span>📅 2026-06</div>
+    <div class='desc'>《热带黄昏》出版于 1988 年，是阿根廷文学巨匠曼努埃尔・普伊格的收官之作。 在二十世纪八十年代的里约热内卢，一对年迈的阿根廷姐妹以对话织就了一曲温柔又苍凉的暮年心歌。她们用无止尽的闲谈对抗着孤独、衰老、病痛，以及挥之不去的死亡阴霾。那些絮语如藤蔓般缠绵交织，既有家长里短的日常琐碎，也有尘封岁月的过往伤痛，藏着对远方子女的牵挂，映着对周遭人事的细腻打量，更一遍遍绕回对女邻居跌宕情路的热议……于看似散漫细碎的闲谈里，作品铺展成一幅意蕴深邃的生命图景，落笔于衰老与死亡，叩问着流亡与归途，描摹着血脉亲情与女性惺惺相惜的情谊，更道尽人类对亲密联结的永恒渴求。记忆与当下交错叠影，倾诉与倾听共振共情，个体命运里的悲欢起落，亦与时代洪流中动荡的历史遥遥相契。 暮色几番沉落，闲谈从未停歇。这细碎的絮语，是脆弱孤苦的生命立于时光洪流之中，用以确认自我存在、彼此依偎取...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38427322/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/l/public/s35519815.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">33. 甜蜜永恒之地</div>
+    <div class="author">✍ [美] 哈珀·李</div>
+    <div class="meta">🏠 译林出版社<span class="sep"> · </span>📅 2026-06</div>
+    <div class='desc'>内容简介】 1960 年，《杀死一只知更鸟》凭空出世，彼时名不见经传的哈珀・李随之成为文学神话。她是如何成为了一名作家？数十年里，这个问题因作者的缄默始终扑朔迷离。 《甜蜜永恒之地》正是解开谜题的关键。它收录了哈珀・李灰尘封数十年、首次面世的八篇小说与八篇散落的随笔。小说均创作于《杀死一只知更鸟》出版前。成长的困惑、家庭教育、都市观察、她一生探寻的正义与人性……它们成为了《...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38391020/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/l/public/s35513662.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">34. 危险的维纳斯</div>
+    <div class="author">✍ [日] 东野圭吾</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06</div>
+    <div class='desc'>兽医手岛伯朗试图摆脱家族的阴影，但美丽女子“枫”的出现打破了一切。她带来了伯朗弟弟明人失踪的消息，也带来了一连串令人不安的疑问。 禁忌与诱惑：10年未见的天才弟弟，30亿日元的巨额遗产，眼下的离奇失踪事件……所有仿佛都与16年前伯朗母亲的意外去世有密切关联。 家人与秘密：伯朗被迫重返那个他极力逃离的豪门家族——矢神家。生命垂危的父亲、虎视眈眈的亲戚……围绕着巨额遗产，每个人似乎都有秘密。 反转与真相：随着伯朗和小枫二人调查的深入，矢神家众人危险的举动接踵而至。没有任何线索，没有人可信任。 隐藏在家人中的凶手，到底是谁？</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37092929/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/l/public/s35513980.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">35. 好人难寻</div>
+    <div class="author">✍ [美] 弗兰纳里·奥康纳</div>
+    <div class="meta">🏠 上海译文出版社<span class="sep"> · </span>📅 2026-06-15</div>
+    <div class='desc'>初版于1955年的《好人难寻》收录了弗兰纳里•奥康纳最具代表性的十篇短篇小说，包括同名代表作《好人难寻》以及《河》《善良的乡下人》《救的可能是你自己的命》等名篇，集中展现了作者独特的南方哥特风格与深邃的宗教寓言色彩，通过荒诞不经的情节与猝不及防的暴力瞬间，揭示现代社会中人的疏离、信仰的困境以及神恩可能的降临方式。其中同名短篇《好人难寻》是奥康纳的传世经典，讲述一个固执己见的老太太在家庭旅行中执意绕道探访旧宅，却意外带领全家遭遇自称“格格不入的人”的越狱逃犯，在一场充满哲学诡辩的对话后，最终走向令人战栗的悲剧结局。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38449906/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35527269.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">36. 张一南北大国文课</div>
+    <div class="author">✍ 张一南</div>
+    <div class="meta">🏠 岳麓书社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 49.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>《张一南北大国文课》源自作者在北京大学教授的“大学国文”通识课讲义，解读了先秦、六朝、唐宋三个时期具有代表性的诗人、思想家、文学家和他们的作品。除了对文本的详细解读、精炼点评之外，本书重在以轻松活泼、讲故事的风格品析创作者的人生、经典背后的深意。先秦时期，选取屈原的《九歌》和庄子的《逍遥游》，重点论述巫文化、老庄思想及其与玄学的关系；六朝时期，围绕“乐府双璧”《孔雀东南飞》和《木兰辞》，以讲故事的方式解读中古时代不同阶层的价值观冲突，重看花木兰的形象；唐宋时期，从文体学角度解析李商隐的无题诗和苏轼的放逐词，深入文人的内心世界。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38508858/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35503973.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">37. 策兰诗全集（全4卷）</div>
+    <div class="author">✍ [法] 保罗·策兰</div>
+    <div class="meta">🏠 人民文学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 199.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>第一卷：《早期作品》《骨灰瓮之沙》《罂粟与回忆》； 第二卷：《从门槛到门槛》《话语之栅》《无人的玫瑰》； 第三卷：《呼吸拐点》《丝线太阳》； 第四卷：《光之强迫》《雪的声部》《时间围场》《晚期诗集》。 《策兰诗全集》分四卷收录保罗•策兰毕生创作的诗歌，包括正式出版的10本诗集、早期作品和晚期作品，以及各个创作时期未收入诗集的散诗和遗作。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38447070/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35525930.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">38. 西夏史稿</div>
+    <div class="author">✍ 吴天墀</div>
+    <div class="meta">🏠 山西人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 98.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>《西夏史稿》是吴天墀西夏史研究的经典力作。全书系统梳理党项部族起源、发展及西夏王朝建立、兴盛与衰亡的完整历程，详细记述西夏与宋、辽、金、蒙古诸政权之间复杂的政治、军事与外交往来。书中深入剖析西夏的政治体制、经济形态、律法制度、宗教文化、社会风俗等方方面面，征引史料丰富详实，考证严谨、观点独到。该书填补了西夏史研究的诸多空白，体系完整、论述精深，是近代西夏史学领域具有奠基意义的代表性著作。 本次再版，新加7篇近80页作者西夏史文章，几乎囊括吴天墀西夏史研究所有作品。加之西夏史研究权威、学部委员史金波最新导读，补叙近20年西夏史研究成果。使本书内容更全面丰富。 名家推荐 近年来国内出版物中少有的上乘之作……不止是填补了西夏史研究的空白，而且在历史科学研究领域中增添了异彩。 ——邓广铭 历史学家 考订周详而不流于烦琐，叙事简明而不流于空疏，对于广大读者和...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38507151/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35522069.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">39. 黑暗时代的人们：20世纪欧洲流亡知识分子群像</div>
+    <div class="author">✍ [美] 汉娜·阿伦特</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06-06<span class="sep"> · </span>💰 59.00元<span class="sep"> · </span>📖 精装 <span class="rating">★ 8.6</span><span style="color:#9b8c7a;font-size:10px"> (21人评价)</span></div>
+    <div class='desc'>内容简介】 “即使在最黑暗的时刻，我们也有理由期待某种启明。 而这种启明，往往并非来自理论与概念，而是来自某些男人和女人， 在他们的生命与作品中，在几乎任何情境下所点燃的那种不确定、微弱、时常摇曳的光。” . 本书并非传统意义上的名人评传，而是聚焦在政治灾难与道德溃败中，如何保存人性与思想之光辉，也是阿伦特以书写他者的方式完成的自我剖析。这是阿伦特最具人文主义色彩、最动人的著作，力图通过友谊、对话、联结行走于失序的世界。 ————————————...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38482027/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35513594.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">40. 古代近东史：约公元前3000年—前323年</div>
+    <div class="author">✍ [美] 马克·范·德·米罗普</div>
+    <div class="meta">🏠 商务印书馆<span class="sep"> · </span>📅 2026-06-30<span class="sep"> · </span>💰 98.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>本书为古代近东文明史入门书，书中整合了最新学术研究成果，全面概述了古代近东多文化的文明，用简明易懂的叙述方式展现了这个地区复杂的历史：从公元前3000年左右文字出现，到美索不达米亚最早的城市起源和城邦纷争，巴比伦、赫梯等区域性国家的形成，亚述和波斯帝国的崛起，以及亚历山大大帝的征服。此外，书中还探讨了波斯帝国时期该地区的治理和延续性，对《吉尔伽美什史诗》等重要文本和资料进行了深入、易懂的讨论。本书配有详细的地图、图表、王表和插图，辅以讨论、知识框、文献等栏目，既适用于古代史专业和考古专业的大学生课程，也适用于对古代近东感兴趣的一般读者。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38427363/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35513144.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">41. 梁宗岱、沉樱与我：一个家族的离散与重逢</div>
+    <div class="author">✍ 梁思薇 / 张力 / 周素凤</div>
+    <div class="meta">🏠 东方出版中心<span class="sep"> · </span>📅 2026-06-06<span class="sep"> · </span>💰 78.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>本书由著名翻译家、评论家梁宗岱和作家、翻译家沉樱的长女梁思薇，以口述方式回望父母的人生轨迹，呈现女儿视角的梁宗岱与沉樱。通过清新可读的文字，鲜明动人的回忆过往，可看出时代背景与家族关怀。翻译家父亲、作家母亲与女儿的生命羁绊；虽断犹连的文坛怨偶，岁月相隔，误会与沉默里藏着未尽的深爱。此外，梁宗岱和沉樱交往的对象皆是著名作家、翻译家，如沈从文、熊十力、徐志摩、巴金、赵清阁、林海音等，透过两代人的家族故事，能了解他们不平凡的历程。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38491441/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35485360.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">42. 心脏占地面积一百八十平方米</div>
+    <div class="author">✍ 鱼骨环行</div>
+    <div class="meta">🏠 四川美术出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 69.80元<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.4</span><span style="color:#9b8c7a;font-size:10px"> (52人评价)</span></div>
+    <div class='desc'>🔵🔵⚪ 如果血氧仪的电线像鱼骨，如果灵魂拥有中转站，我们是不是可以有另一种方式看待“抑郁”和“死亡”？ 小红书人气漫画家鱼骨环行作品首次集结成书，献给世上每一个孤单脆弱的灵魂。 “就是小事啊，小事为什么不能哭？” . 🌟编辑推荐 ◎小红书人气漫画家鱼骨环行作品首次集结成书，献给世上每一个孤单脆弱的灵魂。 “就是小事啊，小事为什么不能哭？” “不是肩膀宽宽的就是大人啦。” “我们可以在一个凉爽的傍晚去 兜风，所有事都交给明天吧。” “我或许得不到人的爱。 “可这个世界不只属于人。 “于是风爱我，雨爱我，目之所及的每一寸土地都爱我。 “所以我存在。” ◎快要溺毙在情绪里的你，在那个闪过无数无尽坏念头的刹那，也许需要的只是一根善意的钓线，这本书所希望充当的，就是那一根小小的钓线。 “死亡并不是一个灵魂的终点，但我还是希望生命存在的时间，你作为‘你’的时间可...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38410447/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35529417.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">43. 古代民主与现代民主：两种自由概念？</div>
+    <div class="author">✍ [德] 威尔弗里德·尼佩尔</div>
+    <div class="meta">🏠 生活·读书·新知三联书店<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 88.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>对西方民主问题的贯通研究，细致梳理古希腊民主与现代民主的异同 · 全面阐述古往今来对雅典民主政治的研究与论争，扎实的老派治史风范 · 梳理西方民主史的关键问题和事件，探究民主制度的源流演变及多重影响 · 一部难得的纵览西方古今民主问题的广博著作，材料丰富，笔法精道 -- 2500年来，雅典民主制度一直是人们推崇、批评或论述的对象。《古代民主与现代民主》全面介绍了雅典的民主制度，包括其特点，对英国、美国和法国革命的重要性，以及它对19世纪至今有关民主和政治自由的辩论的深远影响。 作者的讨论始终以西方当代宪法问题为背景，这些问题一次又一次地与源远流长的传统相联系，既有与古代诸多制度和理念的对话，也有对古典时代遗产的接受或辩驳；它们或涉及西方共同的文化传统，或涉及特定的民族传统，往往是政治立场和学术观点的混合。全书纵论古今，运用丰富的材料阐明了思考和构...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37827707/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35497529.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">44. 叶芝传（上卷）：学徒法师：1865-1914</div>
+    <div class="author">✍ [爱尔兰] R.F.福斯特</div>
+    <div class="meta">🏠 浙江大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 精装</div>
+    <div class='desc'>内容简介】 在 W. B. 叶芝五十多年来的首部授权传记中，R. F. 福斯特对这位19世纪末20世纪初最复杂、最迷人的人物之一提出了全新的解读。从大量私人档案与同时代史料出发，他颠覆了传统观念，揭示了诗人的家族历史、人际关系、政治立场以及其艺术的核心。 上卷传记聚焦于叶芝的前半生。叶芝成长于一个具有强烈民族主义情怀但家道中落的爱尔兰新教家庭。早年，他过着贫困的先锋艺术家的生活，之后他试图通过创立爱尔兰国家剧院实现其政治和艺术抱负，并努力构建自身的公众形象。除此之外，作为“学徒法师”，叶芝始终在探索、研究神秘主义，这种求索与其人生中的惶惑不安紧密相连。 本书还穿插了那些与叶芝的人生紧密相关的人物的故事，这些人物包括格雷戈里夫人、辛格、乔治·摩尔、拉塞尔、庞德，以及最重要的茉德·冈。冈如同不断浴火重生的凤凰，影响着叶芝生命的每个节点。 【媒体推荐】 ...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38388445/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35497530.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">45. 叶芝传（下卷）：首席诗人：1915-1939</div>
+    <div class="author">✍ [爱尔兰] R.F.福斯特</div>
+    <div class="meta">🏠 浙江大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 208.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>内容简介】 威廉 ·巴特勒·叶芝（1865—1939），20世纪最重要的诗人、剧作家、评论家之一，爱尔兰现代文学的奠基人，1923年诺贝尔文学奖得主。 在这套两卷本传记中，R. F. 福斯特依托大量首次披露的私人档案，颠覆了有关叶芝成长环境、人际关系及政治角色的传统认知。 下卷聚焦叶芝人生最后二十五年。此时的叶芝已从爱尔兰文艺复兴旗手跃升为英语诗坛的“首席诗人”，他出任爱尔兰参议参与建设艾比剧院，深度介入现代爱尔兰的政治与文化进程。他的诗歌也在这时期走向成熟与巅峰——神话、历史与个人命运熔铸一体，沉思与激情交织碰撞，为后世留下了不朽的回响。 【媒体推荐】 一部伟大而重要的著作，集学识、思想与共情于一身，其成就之高，在我们这个幻灭的时代几乎难以想象。这部作品的分量，与其英雄般的传主完全相称。 ——约翰·班维尔，《纽约书评》 精彩绝伦……对主要诗作的解...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38192356/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35494799.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">46. 希钦斯回忆录</div>
+    <div class="author">✍ [美] 克里斯托弗·希钦斯</div>
+    <div class="meta">🏠 上海人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 158.00<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>内容简介—————————————————————————————————— 这是一位杰出的反叛者的煽情回忆录，也是希钦斯最狡黠、最具煽动性的作品之一。 在这本永恒而坦诚的回忆录中，希钦斯重新追溯了他迄今为止的生活轨迹，从他在朴茨茅斯的童年，与他那充满爱慕、悲惨的母亲和矜持的...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38405915/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35515922.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">47. 王羲之的“药”</div>
+    <div class="author">✍ 夏可君</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 128<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>国内首部以“药帖”为核心的王羲之研究力作，打捞被遮蔽了千年的真实王羲之。聚焦其晚年有关病痛、服药、问疾的私密信札，还原其通过书写与病痛抗争、与死亡对抗的真实心境。 1.国内首部以“药帖”为核心的王羲之研究，打捞被遮蔽了千年的真实王羲之。本书聚焦长期被忽视的“药帖”，从王羲之写给亲友的病痛信札、服药手记、问候问疾等日常笔墨切入，还原他被头痛、腰痛、脚疾缠身，常年与病痛、死亡对抗的真实人生。 2.从17幅核心药帖，读懂魏晋风骨与中国式生命哲学。全书精选17幅核心药帖，跳出单纯技法赏析，借鉴西方哲学，立足中国传统文脉，从生命哲学、书法艺术、魏晋文化等维度展开解读，透过线条看懂王羲之的痛苦、挣扎与自救，展现魏晋艺术审美与时代生命观。 3.重新定义书法：书写不只是艺术，也是中国人的疗愈良方。王羲之在药石无效之际，以书写为“药”，将身体疼痛、内心焦虑与不安，化作...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38384975/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35497531.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">48. 米价：18世纪中国的市场整合</div>
+    <div class="author">✍ 张瑞威</div>
+    <div class="meta">🏠 浙江大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 平装</div>
+    <div class='desc'>内容简介】 《米价：18世纪中国的市场整合》一书以近代的主要商品大米作为例子，探讨了18世纪中国国内市场的形成和发展规模。作者重点考察了京杭大运河、长江流域的米谷贸易以及相应区域的米价变化发展情况，指出中国18世纪只形成了区域性整合的市场，或者说是间歇性的整合市场，尚未形成全国性的市场整合。作者还通过具体的案例研究，表明政府的积极干预对市场整合具有促进作用，从而验证了卡尔·波兰尼的市场理论，即市场的发展是一连串有意识的人为因素所创造出来的。本书的论证建立在一系列史料验证的基础上，而且以米价这样一个微观视角切入研究社会经济史的重要问题，是一本颇有学术价值的研究著作。 【相关推荐】 张瑞威教授是一位非常勤奋的学者，《米价》一书是他多年研究成果的结晶。米价问题是中国经济史研究中最重要的课题之一，本书在这个问题的研究上取得的成果，对于我们认识清代前半期的经...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38190142/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35497566.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">49. 被败坏的学术：科研中的造假、偏见、疏忽与炒作</div>
+    <div class="author">✍ [英] 斯图尔特·里奇（Stuart Ritchie）</div>
+    <div class="meta">🏠 新华出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 78元<span class="sep"> · </span>📖 平装 <span class="rating">★ 9.0</span><span style="color:#9b8c7a;font-size:10px"> (14人评价)</span></div>
+    <div class='desc'>在真正重要的领域，如医学、教育、心理、健康、育儿等，我们都仰仗科学指引。科学的形象在大众心目中往往是崇高的、客观的、严谨的，实验室里穿着白大褂的研究者们遵循着严格的程序，一步步揭开自然的奥秘。然而，本书却揭示了科学家们难以避免的偏见与疏忽。 作者认为，许多广受认可且极具影响力的理论与主张，如 “启动效应” 与 “成长型思维”、睡眠与营养、基因与微生物组…… 竟都建立在不可靠、夸大甚至欺诈性的论文基础上。 作者站在科学界新改革运动的前沿，致力于揭露并解决这些问题。在这项至关重要的调查中，他汇集了国外令人震惊的科学研究证据和丰富的案例，故事性很强，好像在读学术不端故事会，让人一读起来就放不下。 但本书绝非一部绝望之作。在剖析问题之后，里奇以整整一章的篇幅提出了系统性的解决方案：研究预注册、鼓励复制研究、开放科学与数据共享、改进同行评议、引入专业统计审查…...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38408071/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35534858.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">50. 理解情绪：一项哲学考察</div>
+    <div class="author">✍ 安冬</div>
+    <div class="meta">🏠 上海人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 62.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>内容简介】 我们对于“情绪”这个心理现象都不陌生，但人们（包括哲学家和科学家）对情绪的态度却褒贬不一。从日常用语来看，这个概念比较偏向贬义，比如我们会说“这个人很情绪化”，言下之意就是，情绪状态似乎很不稳定，常伴随着变化而且具有强大的力量。这就似乎意味着，它们通常是一种对所谓正常生活的干扰。这种情况不仅出现在负面情绪中——例如...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38501281/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35511663.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">51. 善之殇：1666年英格兰鼠疫笼罩的村庄</div>
+    <div class="author">✍ 胡荣</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 88<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>当灾难来临时，普通人如何选择？一部中文原创微观史力作，聚焦1666年英国伊姆村鼠疫事件，还原一场以生命为代价的隔离，展现灾难之下乡村生存百态，读懂危机中的秩序与人心。 一本关于牺牲、信仰与人性边界的泣血之作，王笛、赵旭东、徐爱国、赵立行一致推荐！ ☆ 本书亮点 1.国内 首部聚焦1666年英格兰鼠疫事件的中文原创微观史著作，一本关于牺牲、信仰与人性边界的泣血之作，王笛、赵旭东、徐爱国、赵立行一致推荐。 2.采用非虚构写作手法，重现近代早期的公共卫生危机。以17世纪伊姆村鼠疫为切口，精准折射英国法律秩序、权力结构、信仰体系与集体行动的深层震荡，窥见17世纪英国社会的诸多面向。 3.比小说更震撼的真实生存史诗，看见被遗忘的普通人。本书直击人性深处，记录了埋葬自己所有小孩的父母、混进集市被殴打的村民、寄希望于符咒的病人，还原秩序崩塌时刻，普通个体在求生欲与...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38489519/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35516344.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">52. 看懂传播：在信息洪流中重获判断力</div>
+    <div class="author">✍ 刘海龙</div>
+    <div class="meta">🏠 云南人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 98元<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.7</span><span style="color:#9b8c7a;font-size:10px"> (19人评价)</span></div>
+    <div class='desc'>✦从传播的角度理解世界 ✦好读，有用，从日常问题进入，剖析背后的传播机制 ✦在充满操纵的世界中，保留理性与清醒 ✦练出理解媒介社会的思维，学会判断，也更会表达 我们每天都在刷手机、看新闻、发朋友圈、上网“吃瓜”、转发观点、保持沉默。看上去，这些只是个人选择；但在它们背后，媒介技术、平台算法、流量规则、舆论机制和内容生产体系，正在共同塑造我们感知世界、理解他人和判断现实的方式。 为什么热搜总能左右公众注意力？为什么社交媒体一边让人更容易表达，一边又让人更害怕表达？为什么算法越精准，我们越容易被困在自己的信息环境里？为什么 AI 时代到来之后，信息的不平等并没有自然消失？ 刘海龙以扎实的传播学训练和长期公共讲授经验，将专业理论转化为普通读者可以进入、也值得认真思考的知识框架。读完这本书，你获得的不是几个新鲜概念，而是一种在当下所必要的媒介思维和信息判断力...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37941532/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35504895.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">53. 诗的开端：如何理解《诗经》</div>
+    <div class="author">✍ 张定浩</div>
+    <div class="meta">🏠 上海文艺出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 65.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>《诗的开端》是张定浩在《既见君子》之后，更为系统的、溯流而上的写作。他以赋的方式，将《诗经》中一些他认为重要的诗篇逐字逐句讲解。目标是讲出前人所未讲之处，不仅疏通文句，更要贯通诗意，讲明这些诗何以成为诗，并从中体味诗味；在这样的理解与体味中，求得某种属于诗的统一，文字、 句法、音韵、气息、意思、感情等多方面的统一。 本书不仅是关于《诗经》的解读，而且也是一部关于“如何读诗”的方法论示范。一首好诗是有力量的言辞和有力量的生命的结合，当它被逐字逐句讲述时，就能帮助我们学会更准确的表达与更深刻的交流。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37336937/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35488049.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">54. 生育之鉴：明清女科医学的理想与现实</div>
+    <div class="author">✍ [美] 吴一立</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 89<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>1.一部深入探讨明清时期的医学与生育问题的医疗史、妇女史著作。作者的研究方向为医学人类学、女性历史和公共历史等。本书通过揭示明清时期人们对女性生育身体的认知以及性别规范对医学思想的影响，展现了当时医学与社会、文化之间的复杂互动关系。 2.形象地展示明清时期中医产科的方方面面。生育是否是一种病？中医如何看待男女身体，又是如何看待妇科疾病的本质？本书内容涵盖明清妇科与儒医传统、顺承天意的产育观念及产后健康等各方面。 3.从故事切入，围绕主题渐次展开，引人入胜。书中每章开篇由一个真实事件引入，如《胎产心法》作者阎纯玺记述妻子因难产误诊过世而后发奋学医、吴煜的嫂子根据竹林寺医书保胎等，作者戏剧般地把主人公置于生死一线的高度紧张的情节中，让人生出随作者一探究竟的热望。 4.通过古典医籍记述的大量病例和文献材料进行研究。本书对中医妇产科学的研究建立在大量医籍和相...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37562564/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35512790.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">55. 当图像采取立场：历史之眼（第1卷）</div>
+    <div class="author">✍ [法]乔治·迪迪-于贝尔曼</div>
+    <div class="meta">🏠 上海社会科学院出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 78.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>内容简介- 本书为“历史之眼”系列开篇之作，聚焦图像表征的立场与位置问题，以德国诗人、戏剧家贝托尔特·布莱希特对战争的反思为核心，剖析其理论选择与方法路径...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38373976/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35510378.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">56. 1929</div>
+    <div class="author">✍ ［美］安德鲁·罗斯·索尔金（Andrew Ross Sorkin）</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06-01<span class="sep"> · </span>💰 139.90<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.3</span><span style="color:#9b8c7a;font-size:10px"> (13人评价)</span></div>
+    <div class='desc'>华尔街为何在1929年轰然崩塌？全民杠杆、信贷狂欢、官员与银行家暗中角力，谁才是大萧条的真正推手？当擦鞋童都在推荐股票、中产借钱炒股时，美联储为何按兵不动？那些站在权力之巅的银行家，是拯救者，还是纵火犯？ 答案，藏在《1929》尘封的档案中。 《纽约时报》资深财经记者安德鲁·罗斯·索尔金耗时8年，深入挖掘全球一手档案，首次公开纽约联储1929年机密会议记录。通过融合私人信件、庭审档案、未公开回忆录等珍贵史料，他将摩根、米切尔、利弗莫尔等金融巨擘的命运与内心世界进行了全景式还原。从繁荣巅峰到“黑色星期四”，从救市崩盘到国会听证，亲历者的一举一动尽收眼底。 这不仅是一部惊心动魄的华尔街灾难史，更是一部关于人性、杠杆与盲目自信的当代寓言。作者将1929年的极端案例作为一面镜子，帮助读者看透历次市场泡沫背后的底层逻辑。 读完它，你将在复杂多变的投资环境中多一...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38487376/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35510971.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">57. 克拉克森的农场5：农夫的狗</div>
+    <div class="author">✍ 杰里米·克拉克森</div>
+    <div class="meta">🏠 译林出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 48.00元<span class="sep"> · </span>📖 平装 <span class="rating">★ 8.3</span><span style="color:#9b8c7a;font-size:10px"> (41人评价)</span></div>
+    <div class='desc'>2018年，当克拉克森松开超跑的方向盘、放下主持人的话筒，去乡下亲自经营六千多亩的农场时，他没有想到，原来做农民这么难、这么容易赔钱；他的读者也没有想到，原来看一个百万富翁种地会这么“治愈”、这么好笑。 一入农门“误终生”，克拉克森已经在“不足道”农场待了五年。教训？不存在的，克拉克森向来乐观。他已经忘了曾经被羊踢中要害有多疼，又买了一群新品种的羊“祖宗”回来伺候。盈利？想什么呢，他做事从来不计代价。酒吧的东西定价高了没人来，低了不够本，于是店里有多热闹，他就亏得有多惨。经验？有但不多，“出走半生”，归来仍是新手：“漏了一些地没种，拐弯时出岔子，偶尔还会撞到门柱，而且每年都有好几个小时，我没发觉料斗早空了，还在那儿屁颠屁颠忙着播种空气呢。” 克拉克森年年都在整活儿，为查理和卡莱布带来新烦恼，为大家带来新乐子。这次也不例外，还是熟悉的配方、熟悉的味道—...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38488265/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35512019.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">58. 失序的中原：五代53年</div>
+    <div class="author">✍ 陈钦 著</div>
+    <div class="meta">🏠 新世界出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 69.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>五代十国是中国古代历史上第三次大分裂、大混战的时期，是唐的后续、宋的前奏，而梁、唐、晋、汉、周作为中原地区更迭的五个政权，在五代十国历史中占据重要地位。短短53年，中原经历5代、6姓、14帝，天下四分五裂，政权迅速更迭，门阀彻底崩溃，平民精英崛起，权力重新洗牌——在华夏文明核心区，权力更替之快令人咂舌！ 唐宋仅隔53年，为何气质完全相反？从武功强盛到文治天下，从积极进取到保守内敛，中华文明发生转变，皆因这场中原大失控！ 本书用精炼的语言详细梳理五代的历史，清晰展现五代兴起和消亡的全过程，勾勒电视剧《太平年》背后残酷中暗藏新生的大时代，展现在时代乱流中挣扎求活的各色人生。大唐崩盘之后，中原因何乱到这个地步？一个完全失序的乱世要怎样重新组合，才能形成新的统一王朝？这是本书要探讨的。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38490258/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35516283.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">59. 齐格蒙特·鲍曼导论</div>
+    <div class="author">✍ [英]托尼·布莱克肖</div>
+    <div class="meta">🏠 上海文艺出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 58.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>齐格蒙特·鲍曼做社会学家是因为他渴望改变世界。他认识到任何单一因素都难以解释“生活世界”的复杂性，无法涵盖全部人类经验。这使得他的思想及作品涉猎广泛、错综复杂，仿佛不属于任何社会学理论体系，难以被读者把握。 本书是介绍鲍曼思想的导论作品。作者围绕鲍曼独特的“社会学思维”，从他对现代性、自由、安全、身份、共同体、消费等当代日常议题的解释中，提炼出一条不变的主旋律：在我们的日常生活与社会学理论之间建立解释意义上的关联，培养以不同的方式谈论这个世界的能力。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38228848/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35522078.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">60. 一起品尝意大利</div>
+    <div class="author">✍ [法] 法兰索瓦-芮吉·高帝 著</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 460.00<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>纸上的意大利美食博物馆：350 个主题、1272种食物、80张美食地图、365 种地道食谱、456页垂涎欲滴的可口文字。 ⚪编辑推荐 ※ 350 个主题：系统梳理意大利的特色食材、饮食传统、历史源流、顶级餐厅与特色小饭馆、美食名家、风味名吃，以及与美食相关的电影、音乐、文学、画作…… ※ 1272种食物、80张美食地图：从阿尔卑斯山麓到西西里海岸，从食材源头理解风味本质；从穷人料理到宫廷盛宴，揭秘意大利的美食灵魂。 ※ 365 种地道食谱：既有知名主厨亲授的正宗食谱，也有意大利祖母的家常菜配方，用料精准到克，在家可以轻松复刻。 ※ 456页垂涎欲滴的可口文字，数不尽的插绘、地址、小贴士和趣闻逸事：多位学者、名厨、手艺人、美食家、插画家历时三年打磨完成，兼具知识深度与阅读趣味。 ※ 245毫米×328毫米，超大开本精装，全彩印刷：排版考究，插图精美，让...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38502920/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35505564.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">61. 浮生明灭：历史深处的宋人</div>
+    <div class="author">✍ 周琳</div>
+    <div class="meta">🏠 上海人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 90<span class="sep"> · </span>📖 精装 <span class="rating">★ 8.9</span><span style="color:#9b8c7a;font-size:10px"> (50人评价)</span></div>
+    <div class='desc'>公元900年的头10年，军阀朱温残暴灭唐，建立了五代第一个朝代——后梁。 旧有体制的崩坏、政治重心的转移、族群的重构、旧式贵族的消亡。一个平民化的时代到来了，亟需形成新的秩序。 大宋开国者缘何热衷于编织“政治神话”？能臣良将为何总是施展不开手脚？从权臣的苦衷到皇帝的无奈，从“祖宗之法”的规训到现实政治的忌惮…… 热闹与繁华之下，小人物处处迫不得已，大人物又何尝不是浮生明灭？ 本书以9位宋世人物的命运切片，勾勒五代两宋400年起落浮沉。 从五代皇妃王氏乱世求生的悲歌，到赵匡胤“黄袍加身”背后的权力暗局；从摄政太后...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38188679/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35522032.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">62. 在坠落中持续飞行：阿伦特诗集</div>
+    <div class="author">✍ [美]汉娜·阿伦特</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06-06<span class="sep"> · </span>💰 46.00元<span class="sep"> · </span>📖 布面精装掌心本 <span class="rating">★ 8.3</span><span style="color:#9b8c7a;font-size:10px"> (13人评价)</span></div>
+    <div class='desc'>内容简介】 . “唯有在坠落中持续飞行之人，大地才将他托起。他在壮丽中升入光明。” 本书收录汉娜·阿伦特横跨38年（1923—1961）的诗歌创作。 这些诗稿长期沉睡于其私人档案，直至她去世多年后才被重新发现。 历经纳粹上台、盖世太保追逮、集中营拘禁与跨越大西洋的流亡，阿伦特在20世纪的灾难与断裂中，从未放弃理解这个世界。对这位失去故乡与国籍的流亡者而言，诗歌不是逃避现实的庇护所，而是一种安身于世的方式；当一切都可能被剥夺，母语仍为她守住了大地上的栖居。 71首诗作，依创作年代编排，串起她...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38481091/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35527411.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">63. 论渴求：微缩、巨物、纪念品、收藏品</div>
+    <div class="author">✍ [美] 苏珊·斯图尔特</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 平装</div>
+    <div class='desc'>文化研究经典之作，凝视情感裂隙的哲学诗人。 深入理解当代消费文化的隐秘逻辑， 审视个人的收藏欲、纪念欲背后的心理根源； 获得观察日常物品的全新视角； 思考在后工业社会中，我们如何重新定义意义与真实 一部既具有学术严谨性，又充满诗性洞察的著作， 适合所有对文化理论、符号意义与人类渴求感兴趣的读者。 读完这本书，你将永远无法再以同样的方式看待那些你珍视的物品。 ※用物品讲述的故事，却诉说着你的内心真相 你是否曾经思考过： 为什么你会收集那些看似无用的物品，却舍不得丢掉？ 为什么一个微缩模型、一份纪念品、一本珍稀古籍能唤起内心深处的渴求？ 为什么我们执着于拥有，却永远无法真正满足？ 这本书揭示了隐藏在消费社会最深处的秘密： 我们对物品的执念，本质上是对意义、对过去、对自我的执念。 ※一部关于欲望的符号学冒险 作者以敏锐的理论视角，从微观的物品——从书籍、玩...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38190139/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35534361.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">64. 老后独居：老龄化社会，独居者如何体面终老？</div>
+    <div class="author">✍ [日]泽村香苗 / 泽村香苗（沢村香苗）</div>
+    <div class="meta">🏠 中信出版社<span class="sep"> · </span>📅 2026-06-15<span class="sep"> · </span>💰 58.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>内容简介】 日本每年15名逝者中，就有1人无亲无故、无人送终，成为老后独居难民。 他们有养老金、交过介护保险，却在住院时被拒、租房无门、手术无人签字； 认知衰退无人察觉，积蓄被骗光，死后骨灰无人认领，遗产归入国库…… 公共制度能为他们兜底吗？ 介护保险以“有家人照料”为前提，民间身份担保机构小而不稳，公共制度处处漏风。这便是当下日本超老龄化社会中，独居老人所面临的残酷现实。 日本综合研究所资深专家泽村香苗，多年实证调查发现：不婚、丁克、子女疏远、亲属失联，正把独居者的晚年变成一场无人托底的冒险。 住院陪护、费用代缴、医疗决策、遗物清理、丧葬安排——那些我们以为“理所当然有人管”...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37545874/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35535951.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">65. 征服者：重写西班牙探索与帝国史</div>
+    <div class="author">✍ [墨西哥] 费尔南多·塞万提斯</div>
+    <div class="meta">🏠 民主与建设出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 129.00元<span class="sep"> · </span>📖 精装圆脊</div>
+    <div class='desc'>1492年哥伦布首次登陆加勒比海后的短短几十年间，西班牙征服了美洲两个最强大的文明：墨西哥的阿兹特克帝国与秘鲁的印加帝国。埃尔南·科尔特斯、弗朗西斯科·皮萨罗及其他远征者将生命投入追逐政治与宗教荣耀的事业。然而数个世纪后，这些征服者成为噩梦的代名词。在他们所处的时代，他们被颂扬为传播基督教文化、开创旷世帝国的英雄冒险家；但在今日，他们被谴责为摧毁古老文明、在追逐黄金与荣耀过程中犯下骇人暴行的残酷剥削者。 本书穿透神话与虚构的层层迷雾，呈现催生征服者行动的历史语境，展现大航海时代的探险活动如何与政治、经济、宗教相互渗透。通过日记、书信、编年史、...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38435574/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img2.doubanio.com/view/subject/s/public/s35527371.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">66. 静生生物调查所二十二年：1928—1950</div>
+    <div class="author">✍ 胡宗刚</div>
+    <div class="meta">🏠 广东人民出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 88.00<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>内容简介】 本书是中国近现代重要民办科研机构静生生物调查所的信史。 作者以大量的档案史料为依据，完整、忠实地记述了该所1928年至1950年的发展历程，同时系统梳理了其与江西省农业院合办的庐山森林植物园、与云南省教育厅合办的云南农林植物研究所、与中央工业试验所合办的四川乐山木材试验馆等重要机构的创办、运作与历史始末。 全书清晰展现了中国近现代第一批科学家，以“科学救国”为宏愿，在动荡年代筚路蓝缕、坚守学术的奋斗历程；还原了近代中国生物学、植物学等学科的早期建制、人才培养、学术传承的珍贵往事，也是研究中国近现代科技史、生物学史不可多得的权威之作。 ———————————— 【专家推荐】 前辈学者的科学精神、道德学问、学术建制等都有值得传承的价值。今胡宗刚先生率先梳...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37822123/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35528644.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">67. 故事写作大师班</div>
+    <div class="author">✍ [美]约翰·特鲁比</div>
+    <div class="meta">🏠 湖南文艺出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 82.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>◎与《故事》作者罗伯特•麦基齐名，好莱坞故事写作教学大师约翰•特鲁比风行全美30年故事写作课程大公开！ -------------------------------- ◎《怪物史莱克》《猩球崛起》《加勒比海盗》《美食总动员》《西雅图夜未眠》《星球大战》……你所熟知的经典电影都出自他的学生之手！ -------------------------------- ◎知名“剧本医生”以一套完整、精准、实用、有机的写作技法，22步带你穿越创作的迷雾，让创意进化成别人写不出来的好故事！ -------------------------------- ◎从《教父》《哈利•波特》到《阿甘正传》《肖申克的救赎》，从狄更斯、马克•吐温到斯皮尔伯格、库布里克，好莱坞故事大师深入浅出，带你重新认识经典！ --------------------------------...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38390879/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35511468.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">68. 世界历史的长弧之末：技术进步的减速与停滞将怎样改变人类的未来</div>
+    <div class="author">✍ 巫怀宇</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06-08<span class="sep"> · </span>💰 56.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>人这种动物，其幸福不仅取决于既有状态，更来自迈步向前超越当下的可能性。人间万事，盈不可久，便是因为成就越大，余地越小。 本书所涉遍及科技、经济、社会、人口、政治、法律、文化、教育等方方面面，采取以终为始之视角，寻一缕久远线索，统当世千头万绪：社会发展的“低垂果实”已被耗尽，科技与政法皆进步渐缓，改良成本递增而边际效用递减。当人们意识到对现实的自满其实源自可能性的穷竭，历史的终结就显露为历史的见顶，无法再向前释放的欲望更会横生枝杈与负担。 本书以社会变革最勇猛精进的1870—1970年为世界历史之中峰，将发达国家近期的发展降速和伴随而来的种种现象，与工业革命前夜的加速进步时代对比；又将遥远未来终将来临的高技术大停滞，与古代史上漫长的低技术停滞期相较。我们正站在世界历史后半程的起点，此时的决断将波及比预想远得多的未来。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38412221/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img9.doubanio.com/view/subject/s/public/s35544655.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">69. 在雪山和雪山之间：2026全新修订版</div>
+    <div class="author">✍ 乔阳</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 59.80<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>★ 2026年全新改版：新增再版自序，内容修订补充 ★ 随书附赠「绿绒蒿硫酸纸书签」 ★ 鲁豫推荐 - 这是人在雪山之间二十年的故事。 乔阳的童年和少年时期在四川度过，在二十多岁时，她离开家乡，长途跋涉来到云南德钦，从此行走在重重雪山之间。 从高山草甸到干热河谷，从 流石滩到冰川森林…… 她和植物学家、自然摄影师结伴在雪山漫游，辨认花草的名字； 也和当地藏民生活在一起，听他们讲故事或说笑话，逐渐成为其中一员。 自然在她的笔下，与人结成一个广阔的联系。 雪山很大，大到她最初只能看到雪山。 后来才逐渐看到山与山之间的其他事物和人……. - 媒体推荐： 作者乔阳在雪山间独自浪游。她的自然文学让人看到梭罗的痕迹。 仅仅是雪山和云天的光影变化，就可以让人凝望十年甚至终生也不厌倦，让人时隔数载仍铭记在怀，而乔阳是要走到雪山里去的：“看到花，后来看到树和灌丛，再后...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38489637/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img1.doubanio.com/view/subject/s/public/s35533568.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">70. 满者伯夷：印度尼西亚最伟大帝国的阴谋、背叛与战争</div>
+    <div class="author">✍ [荷] 赫勒尔德·范德林德</div>
+    <div class="meta">🏠 东方出版中心<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 68.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>满者伯夷曾是东南亚历史上最强大的海上帝国。13—16世纪初，满者伯夷统治着东爪哇，通过海上贸易、军事扩张与文化融合，建立起横跨今印度尼西亚、马来半岛部分地区以及单马锡（今新加坡）的庞大影响力。本书通过考古资料、古代爪哇和中国的历史文献及欧洲的早期殖民记录，以戏剧性的笔触，深入满者伯夷帝国的权力核心，层层揭露了围绕王位继承展开的血腥宫廷阴谋、家族背叛与残酷内战，精彩描绘了满者伯夷时期华丽的庙宇与恢弘的宫殿，生动刻画了君王、爪哇贵族、婆罗门、隐士等一系列历史人物，立体展现了满者伯夷时期的政治、商业、文化、艺术及其与周边世界互动的繁复图景。这是一部融合了权力、人性与文明历程的帝国史诗，也是一幅宗教多样、社会包容与艺术绚烂的文明长卷，为理解现代印度尼西亚的多元认同与地缘政治处境提供了深沉的历史脉络。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38179915/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35537847.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">71. 制造物欲：消费品与当代生活</div>
+    <div class="author">✍ （英）迪耶·萨迪奇</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-06-22<span class="sep"> · </span>💰 58<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>为什么物品让我们欲罢不能，甚至产生感情？ 为什么如今的物品不像过去，一用就是好几年？ ------------------------------ 解析物品生产底层逻辑 抽丝剥茧物欲从何而来 ------------------------------ 我们生活在被人造消费品填满的世界里，这些物品定义了我们的生活和我们的身份，让我们不断地渴求。在本书中，前伦敦设计博物馆馆长萨迪奇回溯物品的本原，理性地解析物品生产的底层逻辑，抽丝剥茧我们物欲的本质。这是一部思辨物品之价值与标准的文化随笔，也是一段艺术与商业互动关系的简史。读过本书，我们将更理性、更有主见地看待物品。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38522743/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35516257.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">72. 不绝文脉：芝大中华文明课</div>
+    <div class="author">✍ [美] 艾恺</div>
+    <div class="meta">🏠 生活·读书·新知三联书店<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 65.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>脱胎于艾恺芝加哥大学执教四十年的招牌课程，沉淀半生汉学研究的心得，传承芝大核心课程的独特脉络 以汉学家的旁观者视角，在世界史的整体坐标系中定位中华文明 -- 本书以芝加哥大学历史系教授、知名汉学家艾恺讲授的“中华文明的演进”课程为基础，围绕“中华文明的演进及其特征”这一线索，从海外汉学家的角度，研究中华文明的演进史。全书分为 24 讲，从古典时代一直到抗日战争结束，始终贯穿着两个主导问题：中华文明何以延续千年而不间断？传统文化能否以及如何应对现代化的冲击？作者从重大历史事件、人物、地理、文字、思想、制度等方面对中国文明进行深度剖析，并穿插各时期中西文明的发展对比，以别开生面的视角，对中华文明的演进脉络做出了新颖的阐释和解读。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38455223/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35526743.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">73. 草尖上的母亲</div>
+    <div class="author">✍ 余秀华</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 59.00<span class="sep"> · </span>📖 精装 <span class="rating">★ 8.2</span><span style="color:#9b8c7a;font-size:10px"> (15人评价)</span></div>
+    <div class='desc'>《草尖上的母亲》是余秀华最新散文集。不同于第一部随笔集《无端欢喜》，《草尖上的母亲》每一篇都有比较明确的主题：《草尖上的母亲》回忆母亲，以“我”人生的重要节点为线索展开叙述；《病隙日记》记录病中生活的所思所感；《虽为草木人，但无草木心》是横店四季的生活片段；《我曾到过虚土村》是对自我情感的反思，同时伴随着对自身残疾、爱情本质、生命意义的思考；《我的横店村，我的米海尔》则是兼具随笔与小说特质的私小说。 🌳编辑推荐 ★ 暌违八年，国民诗人余秀华最新随笔集 ★草尖上的母亲——一个女儿对母亲的回忆，历时五年写成 不写“完美母亲”，只写真实的人 余秀华之所以成为余秀华，答案都在《草尖上的母亲》里 ...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38507318/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="https://img3.doubanio.com/view/subject/s/public/s35517023.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.nextElementSibling||(this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>'))"></div>
+  <div class="info">
+    <div class="title">74. 发现新常富</div>
+    <div class="author">✍ 李渝萍</div>
+    <div class="meta">🏠 九州出版社<span class="sep"> · </span>📅 2026-06<span class="sep"> · </span>💰 88.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>百年前的瑞典“斜杠青年”新常富 身兼山大教授、地质勘探者、战地记者与远行旅人 1902 至 1954 旅居华夏，以异国视角见证近代中国变迁 一人半生，串联半部中外交流史， 从尘封往事里看见别样近代中国。 ---------------------- --</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38495897/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="section-head">
+    <h3>🌟 当日推荐</h3>
+    <span class="count">5 本精选</span>
+  </div>
+
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">1. 简爱</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 夏洛蒂·勃朗特</div>
+  <div class="rec-meta">📅 2015-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>孤儿简爱从逆境中成长，在桑菲尔德庄园遇到了她的心灵伴侣罗切斯特先生。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;我是自由的，也是有意志的。&quot;简爱在平等与尊严上的坚守，放在今天依然振聋发聩。这不是一个小女孩的灰姑娘故事，而是一个人如何在最难的处境里守住自己的灵魂。</div>
+  <button class="heart-btn" data-id="pool-116">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">2. 神秘岛</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 儒勒·凡尔纳</div>
+  <div class="rec-meta">📅 2007-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>南北战争时期五名逃跑的北方军士兵漂流到无名小岛上，从零开始建立文明。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>一部关于人类创造力和智慧的颂歌。五个人从一无所有到建立完整的文明社会——凡尔纳用这个故事说明：人类最宝贵的财富不是物质，而是知识、技能和相互协作的能力。</div>
+  <button class="heart-btn" data-id="pool-186">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">3. 约翰·克里斯朵夫</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 罗曼·罗兰</div>
+  <div class="rec-meta">📅 2012-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>莱茵河畔德国音乐天才的一生，关于艺术、爱情、理想与精神追求的长篇传记式小说。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;真正的英雄主义只有一种，就是认识生活的真相之后依然热爱生活。&quot;罗曼·罗兰这句话，是整本书最好的注脚。克里斯朵夫的一生是对&quot;如何对抗庸俗&quot;最好的回答。</div>
+  <button class="heart-btn" data-id="pool-112">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">4. 鲁迅全集（精选）</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 鲁迅</div>
+  <div class="rec-meta">📅 2014-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>收录鲁迅最重要的小说、散文和杂文，是了解鲁迅思想的最佳选集。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;从来如此，便对么？&quot;鲁迅的每一篇文章都是对惰性与虚伪的直接攻击，他的笔是一把匕首，而靶子是我们每个人心中那个不肯清醒的自己。越是读懂鲁迅，越是对他又爱又怕。</div>
+  <button class="heart-btn" data-id="pool-184">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">5. 许三观卖血记</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 余华</div>
+  <div class="rec-meta">📅 2014-01 · 🏠 上海文艺出版社</div>
+  <div class='rec-desc'>普通工人许三观十一次卖血，每次都是为了应对生活中的大小危机。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>比《活着》更有温度的余华。许三观的每一次卖血都是一次对家人的爱——这种卑微而真实的爱，让你理解什么叫&quot;尽其所能&quot;。读完想给身边那些默默承担一切的人打一个电话。</div>
+  <button class="heart-btn" data-id="pool-133">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+</div>
+
+<div class="footer">
+  <p>本报告由每日人文社科新书采集器自动生成</p>
+  <p>数据来源：豆瓣网 · 文学、历史、哲学、社科、文化、艺术、传记</p>
+  <p style="margin-top:4px;color:#bbb">📱 公网版：<a href="https://joeyzhengchen.github.io/booklist/" style="color:var(--accent2)">joeyzhengchen.github.io/booklist</a></p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.heart-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('liked');
+    const heart = this.querySelector('.heart');
+    if (this.classList.contains('liked')) {
+      heart.textContent = '♥';
+      this.style.borderColor = '#d44';
+      this.style.color = '#d44';
+      this.style.background = '#fef5f5';
+    } else {
+      heart.textContent = '♡';
+      this.style.borderColor = '#e0d0d0';
+      this.style.color = '#999';
+      this.style.background = '#fff';
+    }
+  });
+});
+</script>
+</body>
+</html>
