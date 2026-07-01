@@ -22,23 +22,49 @@
   .hero p { font-size: 15px; color: #C8C8C3; }
   .hero .sub { color: #F0D78C; font-size: 13px; letter-spacing: 3px; margin-bottom: 8px; }
   .container { max-width: 680px; margin: 0 auto; padding: 30px 20px 60px; }
-  .day-card {
+  .month-group {
     background: #fff;
     border-radius: 10px;
-    padding: 20px 24px;
     margin-bottom: 14px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .month-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: transform 0.15s;
+    padding: 16px 24px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: bold;
+    font-size: 18px;
+    background: #fff;
+    transition: background 0.15s;
+  }
+  .month-bar::-webkit-details-marker { display: none; }
+  .month-bar:hover { background: #F9F7F2; }
+  .month-label { color: #2C2416; }
+  .month-count { font-size: 13px; color: #9B8C7A; font-weight: normal; margin-left: 10px; flex: 1; }
+  .month-arrow { font-size: 14px; color: #9B8C7A; transition: transform 0.2s; }
+  .month-group[open] .month-arrow { transform: rotate(180deg); }
+  .month-days { padding: 0 24px 20px; }
+  .day-card {
+    background: #F9F7F2;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.15s, background 0.15s;
     text-decoration: none;
     color: inherit;
   }
-  .day-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-  .day-card .date { font-size: 18px; font-weight: bold; }
-  .day-card .info { font-size: 13px; color: #9B8C7A; margin-top: 2px; }
-  .day-card .arrow { font-size: 20px; color: #C9A96E; }
+  .day-card:last-child { margin-bottom: 0; }
+  .day-card:hover { transform: translateX(4px); background: #F0EDE6; }
+  .day-card .date { font-size: 16px; font-weight: bold; color: #4A4A4A; }
+  .day-card .info { font-size: 12px; color: #9B8C7A; margin-top: 2px; }
+  .day-card .arrow { font-size: 18px; color: #C9A96E; }
   .footer { text-align: center; padding: 40px 20px; color: #9B8C7A; font-size: 13px; line-height: 1.8; }
   .footer a { color: #8B6914; text-decoration: none; }
   .stats {
@@ -68,6 +94,14 @@
 
 <div class="container">
 
+<details class="month-group" open>
+  <summary class="month-bar">
+    <span class="month-label">2026年07月</span>
+    <span class="month-count">1 期</span>
+    <span class="month-arrow">▾</span>
+  </summary>
+  <div class="month-days">
+    
 <a class="day-card" href="2026-07-01.html">
   <div>
     <div class="date">2026-07-01 星期三<span style="background:#D44444;color:#fff;font-size:11px;padding:1px 8px;border-radius:8px;margin-left:6px;">今天</span></div>
@@ -75,7 +109,16 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
+  </div>
+</details>
+<details class="month-group">
+  <summary class="month-bar">
+    <span class="month-label">2026年06月</span>
+    <span class="month-count">11 期</span>
+    <span class="month-arrow">▾</span>
+  </summary>
+  <div class="month-days">
+    
 <a class="day-card" href="2026-06-30.html">
   <div>
     <div class="date">2026-06-30 星期二</div>
@@ -83,7 +126,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-29.html">
   <div>
     <div class="date">2026-06-29 星期一</div>
@@ -91,7 +133,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-27.html">
   <div>
     <div class="date">2026-06-27 星期六</div>
@@ -99,7 +140,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-26.html">
   <div>
     <div class="date">2026-06-26 星期五</div>
@@ -107,7 +147,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-25.html">
   <div>
     <div class="date">2026-06-25 星期四</div>
@@ -115,7 +154,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-24.html">
   <div>
     <div class="date">2026-06-24 星期三</div>
@@ -123,7 +161,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-23.html">
   <div>
     <div class="date">2026-06-23 星期二</div>
@@ -131,7 +168,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-22.html">
   <div>
     <div class="date">2026-06-22 星期一</div>
@@ -139,7 +175,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-21.html">
   <div>
     <div class="date">2026-06-21 星期日</div>
@@ -147,7 +182,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-20.html">
   <div>
     <div class="date">2026-06-20 星期六</div>
@@ -155,7 +189,6 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
 <a class="day-card" href="2026-06-18.html">
   <div>
     <div class="date">2026-06-18 星期四</div>
@@ -163,7 +196,8 @@
   </div>
   <div class="arrow">→</div>
 </a>
-
+  </div>
+</details>
 </div>
 
 <div class="footer">
