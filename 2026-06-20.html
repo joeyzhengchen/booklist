@@ -30,7 +30,7 @@
     padding: 0;
   }
   .page {
-    max-width: 480px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 0 40px;
   }
@@ -39,7 +39,7 @@
   .hero {
     background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
     color: #fff;
-    padding: 28px 20px 24px;
+    padding: 44px 20px 24px;
     position: relative;
     overflow: hidden;
   }
@@ -51,25 +51,41 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .hero .badge {
     display: inline-block;
     font-size: 11px;
     background: rgba(255,255,255,0.15);
     padding: 3px 10px;
     border-radius: 12px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
   }
   .hero h1 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
-  }
-  .hero .subtitle {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.4;
   }
   .hero .stats-row {
     display: flex;
@@ -297,6 +313,16 @@
     color: #d44;
     background: #fef5f5;
   }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
   .heart-btn .heart { font-size: 16px; }
 
   /* --- 页脚 --- */
@@ -317,19 +343,28 @@
 </style>
 </head>
 <body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
 <div class="page">
 
 <!-- 头部 -->
 <div class="hero">
-  <div class="badge">DAILY BOOKS</div>
-  <h1>人文社科新书速递</h1>
-  <div class="subtitle">
-    2026-06-20 · 豆瓣 7 大分类<br>
-    文学、历史、哲学、社科、文化、艺术、传记
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-06-20</span>
   </div>
+  <h1>人文社科新书速递</h1>
   <div class="stats-row">
     <div class="stat">📚 本月 <em>27</em> 本</div>
-    <div class="stat">🆕 新增 <em>27</em> 本</div>
+    <div class="stat">🆕 新增 <em>5</em> 本</div>
     <div class="stat">🌟 推荐 <em>5</em> 本</div>
   </div>
 </div>
@@ -655,6 +690,7 @@
   <div class="rec-meta">📅 2026-6 · 🏠 北京联合出版公司</div>
   <div class='rec-desc'>兽医手岛伯朗试图摆脱家族的阴影，但美丽女子“枫”的出现打破了一切。她带来了伯朗弟弟明人失踪的消息，也带来了一连串令人不安的疑问。 禁忌与诱惑：10年未见的天才弟弟，30亿日元的巨额遗产，眼下的离奇失踪事件……所有仿佛都与16年前伯朗母亲的意外去世有密切关联。 家人与秘密：伯朗被迫重返那个他极力逃离的豪门家族——矢神家。生命垂危的父亲、虎视眈眈的亲戚……围绕着巨额遗产，每个人似乎都有秘密。 反转与真相：随着伯朗和小枫二人调查的深入，矢神家众人危险的举动接踵而至。没有任何线索，没有人可信任。 隐藏在家人中的凶手，到底是谁？</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%8D%B1%E9%99%A9%E7%9A%84%E7%BB%B4%E7%BA%B3%E6%96%AF%20%5B%E6%97%A5%5D%20%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="37092929">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -668,6 +704,7 @@
   <div class="rec-meta">📅 2026-6 · 🏠 新星出版社</div>
   <div class='rec-desc'>格兰德河对岸，一个墨西哥人对着美国这一侧唱歌。 歌声可以穿越国界，人不能。 美加墨世界杯前夕， 刘骁骞走过美国三座城市——布朗斯维尔、洛杉矶、水牛城， 带来三段不停越界的故事，串联起无数门里门外的人， 不论是试图入内，还是背对大门—— 我们都在这场游戏之中，一刻也不能停歇。 ·</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E9%97%A8%E5%A4%96%EF%BC%9A%E8%BE%B9%E5%A2%83%E3%80%81%E9%94%88%E5%B8%A6%E4%B8%8E%E5%A5%BD%E8%8E%B1%E5%9D%9E%20%E5%88%98%E9%AA%81%E9%AA%9E" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="38461461">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -681,6 +718,7 @@
   <div class="rec-meta">📅 2026-6-15 · 🏠 国文出版社</div>
   <div class='rec-desc'>为了活下去，我们用谎言保护天真。 “年轻的大师”金爱烂，暌违13年长篇力作 韩国大型线上书店Yes24、阿拉丁 2024年度图书 即使今天的你也伤痕累累， 但依然有人，因为你而活过了今天。 ❅❅❅❅❅❅❅ 这是那些从未被选中的人的故事。 那些从未有机会成为主角的，大部分人的一生。 智宇唯一的家人是只蜥蜴，唯一擅长的，是把说不出口的话画成漫画。 采云曾是足球选手，如今只想向父亲复仇。 素莉不再握任何人的手——因为她握住的人，总会离开。 他们不是英雄，没有天赋，没有被选中的命运。 只是都在十几岁时便懂得：贫穷不是不便，是耻辱；不被爱不是偶然，是日常。 三个从未交谈的孩子，被一个游戏、一部漫画、一只狗，牵引至同一处。 靠彼此的秘密，认出了彼此身上形状相同的空洞。 以一个秘密保护另一个秘密，以谎言保护自己的天真。 他们从未成为主角，却意外地成为某个人生命里，...</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%85%B6%E4%B8%AD%E4%B8%80%E4%B8%AA%E6%98%AF%E8%B0%8E%E8%A8%80%20%5B%E9%9F%A9%5D%20%E9%87%91%E7%88%B1%E7%83%82" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="38219662">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -694,6 +732,7 @@
   <div class="rec-meta">📅 2026-6 · 🏠 北京联合出版公司</div>
   <div class='rec-desc'>内容简介】 罗伯特·勃莱是“深度意象派”的主要推动者和代表性诗人。他力图挣脱学院派传统的束缚，将中国古典诗歌、拉美诗歌与欧洲超现实主义诗歌引入美国诗坛，为其注入新的活力。既深入自然与内心风景，又引领我们直视社会的阴影，多重精神传统交织其中，声色斑斓。 本书精选勃莱不同时期的代表性诗作，包括第一部诗集《雪地里的宁静》、获得“美国国家图书奖”的诗集《身体周围的光》、带有中国诗韵的诗集《跳出床外》《睡者手握着手》等，多维度展现勃莱的诗歌世界。 知名翻译家水琴修订，焕新出版。 【名家推荐】 罗伯特·勃莱一生笔耕不辍，已然成为一种具有地质般力量的天才，重塑了诗歌和文化的地貌，使他得以与那些诗歌先驱和无名导师并列——他的诗行，常常在向他们致敬。 ——简·赫斯菲尔德 这些诗作...</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E8%BA%AB%E4%BD%93%E5%91%A8%E5%9B%B4%E7%9A%84%E5%85%89%EF%BC%9A%E5%8B%83%E8%8E%B1%E8%AF%97%E7%B2%BE%E9%80%89%20%5B%E7%BE%8E%5D%20%E7%BD%97%E4%BC%AF%E7%89%B9%C2%B7%E5%8B%83%E8%8E%B1" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="37806056">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -707,6 +746,7 @@
   <div class="rec-meta">📅 2026-6 · 🏠 广东旅游出版社</div>
   <div class='rec-desc'>利娅离开了我，去执行一趟深海任务，为期三周。 她去了六个月，音讯全无。我还以为我永远失去了她。直到有一天，她回来了，但回来的又并不是她。 没有人告诉我在那艘潜艇里发生了什么，也没有人告诉我她们在深海中看到了什么。但不管那是什么东西，利娅都把它的一部分带回来了，带回到了干燥的陆地上，带回到了我们共享的、名为“家”的空间里。 我试图假装一切都好，一切如常。哪怕利娅总是莫名地流血，莫名地褪皮，莫名地忍受不了一切触碰。我开始意识到，我们之前拥有的生活可能已经消失了。虽然利娅还在这里，但那个我爱的女人已经被夺走了，被深海的某个东西夺走了。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E6%B7%B1%E6%B5%B7%E4%B9%8B%E5%A6%BB%20%5B%E8%8B%B1%5D%20%E6%9C%B1%E8%8E%89%E5%A8%85%C2%B7%E9%98%BF%E5%A7%86%E8%8F%B2%E5%B0%94%E5%BE%B7%20%28Julia%20Armfield%29" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="37426417">
     <span class="heart">♡</span> 感兴趣
   </button>

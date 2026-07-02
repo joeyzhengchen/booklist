@@ -30,7 +30,7 @@
     padding: 0;
   }
   .page {
-    max-width: 480px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 0 40px;
   }
@@ -39,7 +39,7 @@
   .hero {
     background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
     color: #fff;
-    padding: 28px 20px 24px;
+    padding: 44px 20px 24px;
     position: relative;
     overflow: hidden;
   }
@@ -51,25 +51,41 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .hero .badge {
     display: inline-block;
     font-size: 11px;
     background: rgba(255,255,255,0.15);
     padding: 3px 10px;
     border-radius: 12px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
   }
   .hero h1 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
-  }
-  .hero .subtitle {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.4;
   }
   .hero .stats-row {
     display: flex;
@@ -297,6 +313,16 @@
     color: #d44;
     background: #fef5f5;
   }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
   .heart-btn .heart { font-size: 16px; }
 
   /* --- 页脚 --- */
@@ -317,16 +343,25 @@
 </style>
 </head>
 <body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
 <div class="page">
 
 <!-- 头部 -->
 <div class="hero">
-  <div class="badge">DAILY BOOKS</div>
-  <h1>人文社科新书速递</h1>
-  <div class="subtitle">
-    2026-06-26 · 豆瓣 7 大分类<br>
-    文学、历史、哲学、社科、文化、艺术、传记
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-06-26</span>
   </div>
+  <h1>人文社科新书速递</h1>
   <div class="stats-row">
     <div class="stat">📚 本月 <em>70</em> 本</div>
     <div class="stat">🆕 新增 <em>8</em> 本</div>
@@ -1128,6 +1163,7 @@
   <div class="rec-meta">📅 2015-01 · 🏠 人民文学出版社</div>
   <div class='rec-desc'>荒野中孤儿希斯克利夫对少女凯瑟琳疯狂的爱恨情仇，跨越两代人的复仇与救赎。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>英国文学中最黑暗、最激烈的爱情故事。希斯克利夫的爱已经超越了道德的边界，变成了一种毁灭性的力量——艾米莉·勃朗特让我们看到，爱到极致可以如此美丽，也可以如此残酷。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%91%BC%E5%95%B8%E5%B1%B1%E5%BA%84%20%E8%89%BE%E7%B1%B3%E8%8E%89%C2%B7%E5%8B%83%E6%9C%97%E7%89%B9" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-117">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -1141,6 +1177,7 @@
   <div class="rec-meta">📅 2012-01 · 🏠 中华书局</div>
   <div class='rec-desc'>收录唐代77位诗人的310首诗，是最具代表性的唐诗选集。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;熟读唐诗三百首，不会写诗也会吟。&quot;无论是李白的豪放、杜甫的沉郁、还是王维的禅意，唐诗代表了汉语抒情文学的最高峰。每首诗都是一个世界，三百首就是三百个世界。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%94%90%E8%AF%97%E4%B8%89%E7%99%BE%E9%A6%96%20%E8%98%85%E5%A1%98%E9%80%80%E5%A3%AB%EF%BC%88%E7%BC%96%EF%BC%89" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-099">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -1154,6 +1191,7 @@
   <div class="rec-meta">📅 2018-01 · 🏠 南海出版公司</div>
   <div class='rec-desc'>马尔克斯早期短篇小说集，已显示出魔幻现实主义的雏形。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>看大师如何起步。这些早期短篇已经有了马尔克斯标志性的平静叙述荒诞之事的口吻——每个故事都像一颗小石子投入平静的湖面，引起的涟漪让你久久无法平静。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E4%B9%8B%E5%A4%96%C2%B7%E5%AE%B6%E6%97%8F%E7%9A%84%E7%A7%98%E5%AF%86%20%E5%8A%A0%E8%A5%BF%E4%BA%9A%C2%B7%E9%A9%AC%E5%B0%94%E5%85%8B%E6%96%AF" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-061">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -1167,6 +1205,7 @@
   <div class="rec-meta">📅 2009-01 · 🏠 人民文学出版社</div>
   <div class='rec-desc'>以北京城一家茶馆三个时期的变迁，折射清末至民国半个世纪中国社会兴衰。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>老舍用一个茶馆装下了整个中国近代史。&quot;我爱咱们的国，可是谁爱我呢？&quot;——王利发这句话，道尽了多少小人物的无奈与悲哀。看完茶馆，你对那段历史的理解会比任何教科书都更真切。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E8%8C%B6%E9%A6%86%20%E8%80%81%E8%88%8D" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-130">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -1180,6 +1219,7 @@
   <div class="rec-meta">📅 2010-01 · 🏠 译林出版社</div>
   <div class='rec-desc'>以荷马史诗《奥德赛》为框架，描写1904年6月16日都柏林普通市民的一天。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>二十世纪最伟大、最难读的小说。不需要全部读懂——光是那个&quot;是的我愿意说是&quot;的结尾，就值得你翻开这本书。乔伊斯把一个普通人的一天变成了整个宇宙。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%B0%A4%E5%88%A9%E8%A5%BF%E6%96%AF%20%E8%A9%B9%E5%A7%86%E6%96%AF%C2%B7%E4%B9%94%E4%BC%8A%E6%96%AF" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-057">
     <span class="heart">♡</span> 感兴趣
   </button>

@@ -30,7 +30,7 @@
     padding: 0;
   }
   .page {
-    max-width: 480px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 0 40px;
   }
@@ -39,7 +39,7 @@
   .hero {
     background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
     color: #fff;
-    padding: 28px 20px 24px;
+    padding: 44px 20px 24px;
     position: relative;
     overflow: hidden;
   }
@@ -51,25 +51,41 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .hero .badge {
     display: inline-block;
     font-size: 11px;
     background: rgba(255,255,255,0.15);
     padding: 3px 10px;
     border-radius: 12px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
   }
   .hero h1 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
-  }
-  .hero .subtitle {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.4;
   }
   .hero .stats-row {
     display: flex;
@@ -297,6 +313,16 @@
     color: #d44;
     background: #fef5f5;
   }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
   .heart-btn .heart { font-size: 16px; }
 
   /* --- 页脚 --- */
@@ -317,16 +343,25 @@
 </style>
 </head>
 <body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
 <div class="page">
 
 <!-- 头部 -->
 <div class="hero">
-  <div class="badge">DAILY BOOKS</div>
-  <h1>人文社科新书速递</h1>
-  <div class="subtitle">
-    2026-06-23 · 豆瓣 7 大分类<br>
-    文学、历史、哲学、社科、文化、艺术、传记
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-06-23</span>
   </div>
+  <h1>人文社科新书速递</h1>
   <div class="stats-row">
     <div class="stat">📚 本月 <em>48</em> 本</div>
     <div class="stat">🆕 新增 <em>9</em> 本</div>
@@ -886,6 +921,7 @@
   <div class="rec-meta">📅 2003-01 · 🏠 人民文学出版社</div>
   <div class='rec-desc'>中世纪意大利诗人但丁以诗歌形式描绘地狱、炼狱和天堂之旅。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>人类有史以来最雄心勃勃的写作计划之一——把整个宇宙塞进一首诗里。但丁的地狱比任何恐怖小说都更生动：那些罪人的惩罚，折射的正是人性最深的欲望与恐惧。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%A5%9E%E6%9B%B2%20%E4%BD%86%E4%B8%81" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-105">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -899,6 +935,7 @@
   <div class="rec-meta">📅 2014-01 · 🏠 上海译文出版社</div>
   <div class='rec-desc'>20世纪50年代美国，两个年轻人横穿大陆的公路旅行，成为垮掉一代的精神圣经。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>年轻时必读的书。凯鲁亚克用连续敲出的意识流文字记录了对自由的最原始渴望——公路的尽头不是终点，而是另一段旅程的开始。有些书只有在特定年龄读到，才能理解其中的狂热与悲伤。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%9C%A8%E8%B7%AF%E4%B8%8A%20%E6%9D%B0%E5%85%8B%C2%B7%E5%87%AF%E9%B2%81%E4%BA%9A%E5%85%8B" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-059">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -912,6 +949,7 @@
   <div class="rec-meta">📅 2013-04 · 🏠 商务印书馆</div>
   <div class='rec-desc'>以地中海为核心，从地理、经济、政治等多层面分析16世纪的历史。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>历史不只是帝王将相的故事。布罗代尔教你看&quot;长时段&quot;——地理、气候、海洋这些缓慢变化的因素才是历史的底层逻辑。读完你会理解为什么地中海周边文明如此绵延不绝。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%9C%B0%E4%B8%AD%E6%B5%B7%E8%80%83%E5%8F%A4%20%E5%B8%83%E7%BD%97%E4%BB%A3%E5%B0%94" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-086">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -925,6 +963,7 @@
   <div class="rec-meta">📅 2010-01 · 🏠 广西师范大学出版社</div>
   <div class='rec-desc'>茨威格的自传，记述奥匈帝国黄金时代到二战结束整个欧洲文明的消亡。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>一个文明的挽歌。茨威格亲眼见证了维也纳最辉煌的年代和两次世界大战对整个欧洲文明的毁灭——写完这本书不久，他在流亡中与妻子双双自杀。这是一本关于&quot;我们失去了什么&quot;的终极之书。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E6%98%A8%E6%97%A5%E7%9A%84%E4%B8%96%E7%95%8C%20%E6%96%AF%E8%92%82%E8%8A%AC%C2%B7%E8%8C%A8%E5%A8%81%E6%A0%BC" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-143">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -938,6 +977,7 @@
   <div class="rec-meta">📅 2010-01 · 🏠 商务印书馆</div>
   <div class='rec-desc'>罗素以哲学家和文学家的双重眼光，梳理从苏格拉底到维特根斯坦的西方哲学史。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>最好读的哲学史著作，没有之一。罗素的文笔妙趣横生，他对哲学家的批评有时候刻薄得令人发笑，但见解之深刻令人叹服。这本书是打开西方思想史的最佳钥匙。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%8F%B2%20%E4%BC%AF%E7%89%B9%E5%85%B0%C2%B7%E7%BD%97%E7%B4%A0" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-077">
     <span class="heart">♡</span> 感兴趣
   </button>

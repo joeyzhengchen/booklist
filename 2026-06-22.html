@@ -30,7 +30,7 @@
     padding: 0;
   }
   .page {
-    max-width: 480px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 0 40px;
   }
@@ -39,7 +39,7 @@
   .hero {
     background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
     color: #fff;
-    padding: 28px 20px 24px;
+    padding: 44px 20px 24px;
     position: relative;
     overflow: hidden;
   }
@@ -51,25 +51,41 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .hero .badge {
     display: inline-block;
     font-size: 11px;
     background: rgba(255,255,255,0.15);
     padding: 3px 10px;
     border-radius: 12px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
   }
   .hero h1 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
-  }
-  .hero .subtitle {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.4;
   }
   .hero .stats-row {
     display: flex;
@@ -297,6 +313,16 @@
     color: #d44;
     background: #fef5f5;
   }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
   .heart-btn .heart { font-size: 16px; }
 
   /* --- 页脚 --- */
@@ -317,16 +343,25 @@
 </style>
 </head>
 <body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
 <div class="page">
 
 <!-- 头部 -->
 <div class="hero">
-  <div class="badge">DAILY BOOKS</div>
-  <h1>人文社科新书速递</h1>
-  <div class="subtitle">
-    2026-06-22 · 豆瓣 7 大分类<br>
-    文学、历史、哲学、社科、文化、艺术、传记
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-06-22</span>
   </div>
+  <h1>人文社科新书速递</h1>
   <div class="stats-row">
     <div class="stat">📚 本月 <em>39</em> 本</div>
     <div class="stat">🆕 新增 <em>2</em> 本</div>
@@ -787,6 +822,7 @@
   <div class="rec-meta">📅 2018-05 · 🏠 上海译文出版社</div>
   <div class='rec-desc'>英国老管家史蒂文斯驾车旅行，一路上回忆在这座贵族府邸中长达三十年的服务生涯。在矜持、克制、不动声色的叙述中，一段错失的爱情和被虚掷的人生逐渐浮现——最深的悲哀是安静地说出口。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>石黑一雄最完美的作品。一个人用一辈子的&quot;职业尊严&quot;换来了巨大的情感空洞——你会在史蒂文斯身上看到自己，看到我们如何为&quot;体面&quot;错过了真正地活着。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E9%95%BF%E6%97%A5%E5%B0%86%E5%B0%BD%20%E7%9F%B3%E9%BB%91%E4%B8%80%E9%9B%84" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-010">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -800,6 +836,7 @@
   <div class="rec-meta">📅 2014-07 · 🏠 上海译文出版社</div>
   <div class='rec-desc'>1869年夏天，缪尔在内华达山脉间漫游三个月。以科学家般的精确和诗人般的热情记录了山川、云彩、植物和动物——每一页都是对大自然的深情告白。群山在呼唤，我必须离开。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>如果你厌倦了城市，就让缪尔带你到山间走一趟。他的文字有治愈一切的魔力——山在那里，万物生长，而你是其中的一部分。这本书是给城市人的最好解药。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%A4%8F%E6%97%A5%E8%B5%B0%E8%BF%87%E5%B1%B1%E9%97%B4%20%E7%BA%A6%E7%BF%B0%C2%B7%E7%BC%AA%E5%B0%94" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-047">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -813,6 +850,7 @@
   <div class="rec-meta">📅 2012-06 · 🏠 人民文学出版社</div>
   <div class='rec-desc'>土地测量员K来到城堡管辖的村庄，却始终无法进入近在咫尺的城堡。K与庞大的官僚系统进行了一场无望的对抗——城堡永远可望而不可即，而K永远无法知道那个最初的决定是谁做出的、为什么做出。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>一部关于官僚体制和现代人无力感的神作。城堡就在眼前，你却永远无法抵达——这不就是每个人在某些时刻的真实感受吗？卡夫卡写的其实是我们所有人的日常。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%9F%8E%E5%A0%A1%20%E5%8D%A1%E5%A4%AB%E5%8D%A1" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-020">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -826,6 +864,7 @@
   <div class="rec-meta">📅 2012-04 · 🏠 译林出版社</div>
   <div class='rec-desc'>马可·波罗向忽必烈汗讲述他游历过的五十五座城市——每座城市都是关于欲望、记忆、符号与死亡的寓言。卡尔维诺用诗意如水晶的文字构建了一座文字迷宫，让人在其中迷失也同时找到自己。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>关于城市和记忆的最美小说。每一章都像一首散文诗，让你重新审视你所居住的城市和你所拥有的记忆——也许你住的城市就是你的灵魂。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%9C%8B%E4%B8%8D%E8%A7%81%E7%9A%84%E5%9F%8E%E5%B8%82%20%E4%BC%8A%E5%A1%94%E6%B4%9B%C2%B7%E5%8D%A1%E5%B0%94%E7%BB%B4%E8%AF%BA" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-013">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -839,6 +878,7 @@
   <div class="rec-meta">📅 2010-08 · 🏠 上海译文出版社</div>
   <div class='rec-desc'>主人公默尔索对母亲的去世表现得无动于衷，在一次恍惚中开枪杀人，法庭上却因&quot;在母亲葬礼上没有哭&quot;而被判处死刑。小说以极度冷静的笔触揭示人与世界的荒谬关系及个体在社会规范前的异化。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>荒诞文学的奠基之作。默尔索的冷漠不是麻木，而是对虚假价值的拒绝。加缪用最简洁的文字道出最深的存在困境——我们不也常常扮演着社会规定的角色吗？</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%B1%80%E5%A4%96%E4%BA%BA%20%E9%98%BF%E5%B0%94%E8%B4%9D%C2%B7%E5%8A%A0%E7%BC%AA" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-005">
     <span class="heart">♡</span> 感兴趣
   </button>

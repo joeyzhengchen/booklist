@@ -30,7 +30,7 @@
     padding: 0;
   }
   .page {
-    max-width: 480px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 0 40px;
   }
@@ -39,7 +39,7 @@
   .hero {
     background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
     color: #fff;
-    padding: 28px 20px 24px;
+    padding: 44px 20px 24px;
     position: relative;
     overflow: hidden;
   }
@@ -51,25 +51,41 @@
     background: rgba(255,255,255,0.04);
     border-radius: 50%;
   }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .hero .badge {
     display: inline-block;
     font-size: 11px;
     background: rgba(255,255,255,0.15);
     padding: 3px 10px;
     border-radius: 12px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
   }
   .hero h1 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 4px;
     letter-spacing: -0.3px;
-  }
-  .hero .subtitle {
-    font-size: 13px;
-    opacity: 0.75;
-    line-height: 1.4;
   }
   .hero .stats-row {
     display: flex;
@@ -297,6 +313,16 @@
     color: #d44;
     background: #fef5f5;
   }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
   .heart-btn .heart { font-size: 16px; }
 
   /* --- 页脚 --- */
@@ -317,19 +343,28 @@
 </style>
 </head>
 <body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
 <div class="page">
 
 <!-- 头部 -->
 <div class="hero">
-  <div class="badge">DAILY BOOKS</div>
-  <h1>人文社科新书速递</h1>
-  <div class="subtitle">
-    2026-06-21 · 豆瓣 7 大分类<br>
-    文学、历史、哲学、社科、文化、艺术、传记
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-06-21</span>
   </div>
+  <h1>人文社科新书速递</h1>
   <div class="stats-row">
     <div class="stat">📚 本月 <em>26</em> 本</div>
-    <div class="stat">🆕 新增 <em>26</em> 本</div>
+    <div class="stat">🆕 新增 <em>10</em> 本</div>
     <div class="stat">🌟 推荐 <em>5</em> 本</div>
   </div>
 </div>
@@ -644,6 +679,7 @@
   <div class="rec-meta">📅 2018-01 · 🏠 人民文学出版社</div>
   <div class='rec-desc'>北平人力车夫祥子梦想拥有一辆自己的洋车。他三次买车，三次失去。老舍以京味语言和深沉同情写尽了底层劳动者在旧社会被压榨被毁灭的悲剧——体面的、要强的、好梦想的祥子，终究成了一具行尸走肉。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>中国现代文学中最悲凉的奋斗史。祥子不是不努力，而是在一个不把人当人的社会里，努力本身就是一种讽刺。每个在城市奋斗的年轻人心中，都住着一个祥子。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E9%AA%86%E9%A9%BC%E7%A5%A5%E5%AD%90%20%E8%80%81%E8%88%8D" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-040">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -657,6 +693,7 @@
   <div class="rec-meta">📅 2012-09 · 🏠 南海出版公司</div>
   <div class='rec-desc'>弗洛伦蒂诺等待费尔明娜长达五十一年九个月零四天。马尔克斯写尽了从青涩到成熟、从肉体到灵魂的各种爱情形态——忠贞的、隐秘的、粗暴的、柏拉图式的、放荡的、转瞬即逝的、生死相依的。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>爱情有无数种模样——马尔克斯在这本书里穷尽了所有可能。等待半个世纪的爱情到底是愚蠢还是伟大？每个读者都有自己的答案，而答案本身也是爱情的一种。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E9%9C%8D%E4%B9%B1%E6%97%B6%E6%9C%9F%E7%9A%84%E7%88%B1%E6%83%85%20%E5%8A%A0%E8%A5%BF%E4%BA%9A%C2%B7%E9%A9%AC%E5%B0%94%E5%85%8B%E6%96%AF" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-017">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -670,6 +707,7 @@
   <div class="rec-meta">📅 2026-6 · 🏠 上海译文出版社</div>
   <div class='rec-desc'>本书是尤金尼德斯继普利策奖获奖作品《中性》之后推出的一部短篇小说集，集结了作者发表于《纽约客》《耶鲁评论》等报刊上的短篇小说共十篇。作品以现实视角聚焦老后破产、女性互助养老、生育焦虑、地产泡沫、学术不端等当下热点，探索高学历群体如何尝试不同的方案解决人生问题，塑造了一组活在中产阶级的邋遢不堪中的现代人群像。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%88%86%E6%97%B6%E5%BA%A6%E5%81%87%20%5B%E7%BE%8E%5D%20%E6%9D%B0%E5%BC%97%E9%87%8C%C2%B7%E5%B0%A4%E9%87%91%E5%B0%BC%E5%BE%B7%E6%96%AF" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="38445518">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -683,6 +721,7 @@
   <div class="rec-meta">📅 2003-01 · 🏠 人民文学出版社</div>
   <div class='rec-desc'>贫困的大学生拉斯柯尼科夫杀害放高利贷的老太婆，自认为可以超越常人的道德——然后灵魂开始崩溃。陀氏以惊人的心理深度展现了一个人从罪恶到忏悔、从自我毁灭到重获新生的全过程。</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span>人类精神世界最深刻的地图。你会和拉斯柯尼科夫一起坠入深渊，再一起爬出来——这就是文学的净化力量。谁说苦难不是通往救赎的必经之路呢？</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%BD%AA%E4%B8%8E%E7%BD%9A%20%E9%99%80%E6%80%9D%E5%A6%A5%E8%80%B6%E5%A4%AB%E6%96%AF%E5%9F%BA" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="pool-024">
     <span class="heart">♡</span> 感兴趣
   </button>
@@ -696,6 +735,7 @@
   <div class="rec-meta">📅 2026-6 · 🏠 新华出版社</div>
   <div class='rec-desc'>在真正重要的领域，如医学、教育、心理、健康、育儿等，我们都仰仗科学指引。科学的形象在大众心目中往往是崇高的、客观的、严谨的，实验室里穿着白大褂的研究者们遵循着严格的程序，一步步揭开自然的奥秘。然而，本书却揭示了科学家们难以避免的偏见与疏忽。 作者认为，许多广受认可且极具影响力的理论与主张，如 “启动效应” 与 “成长型思维”、睡眠与营养、基因与微生物组…… 竟都建立在不可靠、夸大甚至欺诈性的论文基础上。 作者站在科学界新改革运动的前沿，致力于揭露并解决这些问题。在这项至关重要的调查中，他汇集了国外令人震惊的科学研究证据和丰富的案例，故事性很强，好像在读学术不端故事会，让人一读起来就放不下。 但本书绝非一部绝望之作。在剖析问题之后，里奇以整整一章的篇幅提出了系统性的解决方案：研究预注册、鼓励复制研究、开放科学与数据共享、改进同行评议、引入专业统计审查…...</div>
   <div class="rec-reason"><span class="label">💡 推荐理由</span></div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E8%A2%AB%E8%B4%A5%E5%9D%8F%E7%9A%84%E5%AD%A6%E6%9C%AF%EF%BC%9A%E7%A7%91%E7%A0%94%E4%B8%AD%E7%9A%84%E9%80%A0%E5%81%87%E3%80%81%E5%81%8F%E8%A7%81%E3%80%81%E7%96%8F%E5%BF%BD%E4%B8%8E%E7%82%92%E4%BD%9C%20%5B%E8%8B%B1%5D%20%E6%96%AF%E5%9B%BE%E5%B0%94%E7%89%B9%C2%B7%E9%87%8C%E5%A5%87%EF%BC%88Stuart%20Ritchie%EF%BC%89" target="_blank" rel="noopener">📖 书籍详情</a>
   <button class="heart-btn" data-id="38408071">
     <span class="heart">♡</span> 感兴趣
   </button>
