@@ -1,0 +1,137 @@
+name: 每日人文社科新书采集
+
+on:
+  schedule:
+    # 北京时间 10:00 = UTC 2:00
+    # 云端生成 → 本地 10:20 拉取 PNG 发微信
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ============ 检出代码 ============
+
+      - name: 检出主分支（源代码）
+        uses: actions/checkout@v4
+
+      - name: 检出 gh-pages（历史书单文件）
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: booklist-site
+
+      - name: 获取当天日期
+        id: date
+        run: echo "TODAY=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      # ============ 环境设置 ============
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装中文字体
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+
+      - name: 安装 Node 依赖
+        run: npm ci
+
+      - name: 安装 Python 依赖
+        run: pip install -r requirements.txt
+
+      - name: 准备目录
+        run: mkdir -p reports
+
+      # ============ 数据采集 ============
+
+      - name: Step 1 - 采集豆瓣新书数据
+        id: scrape
+        run: node scripts/daily_books.js
+        timeout-minutes: 8
+        env:
+          NODE_OPTIONS: ""
+
+      # ============ 生成输出 ============
+
+      - name: Step 2 - 生成手机适配 HTML
+        run: |
+          python generate_mobile_html.py \
+            --date ${{ steps.date.outputs.TODAY }} \
+            --json ./reports/${{ steps.date.outputs.TODAY }}.json \
+            --output ./booklist-site/${{ steps.date.outputs.TODAY }}.html
+        env:
+          BOOKLIST_REPORTS_DIR: ./reports
+          BOOKLIST_SITE_DIR: ./booklist-site
+          BOOKLIST_COVERS_DIR: ./booklist-site/covers/${{ steps.date.outputs.TODAY }}
+
+      - name: Step 3 - 渲染手机长图 PNG
+        run: |
+          python render_booklist_image.py \
+            --date ${{ steps.date.outputs.TODAY }} \
+            --json ./reports/${{ steps.date.outputs.TODAY }}.json \
+            --output ./booklist-site/mobile_booklist_${{ steps.date.outputs.TODAY }}.png
+        env:
+          BOOKLIST_REPORTS_DIR: ./reports
+          BOOKLIST_SITE_DIR: ./booklist-site
+          BOOKLIST_OUTPUT_DIR: ./booklist-site
+
+      - name: Step 4 - 更新书单首页
+        run: node scripts/update_index.js
+        env:
+          BOOKLIST_SITE_DIR: ./booklist-site
+
+      # ============ 推送 ============
+
+      - name: Step 5 - 推送书单到 gh-pages
+        run: |
+          cd booklist-site
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --staged --quiet; then
+            echo "无变更，跳过推送"
+          else
+            git commit -m "feat: 自动生成 ${{ steps.date.outputs.TODAY }} 书单 [skip ci]"
+            git push
+          fi
+
+      - name: Step 6 - 回存数据状态到主分支
+        run: |
+          # 把 daily_books.js 产生的状态文件（yesterday_books.json 等）提交回主分支
+          # 保证下次云端运行时能基于正确的历史数据判断"本日新增"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/yesterday_books.json data/recommend_history.json data/preferences.json
+          if git diff --staged --quiet; then
+            echo "数据无变更，跳过提交"
+          else
+            git commit -m "chore: 更新采集数据状态 ${{ steps.date.outputs.TODAY }} [skip ci]"
+            git push
+          fi
+
+      # ============ 结果汇总 ============
+
+      - name: 汇总结果
+        run: |
+          echo "================================================"
+          echo "  ✅ 每日人文社科新书采集 - 云端完成"
+          echo "  日期: ${{ steps.date.outputs.TODAY }}"
+          echo "  公网首页: https://joeyzhengchen.github.io/booklist/"
+          echo "  当日书单: https://joeyzhengchen.github.io/booklist/${{ steps.date.outputs.TODAY }}.html"
+          echo "  长图地址: https://joeyzhengchen.github.io/booklist/mobile_booklist_${{ steps.date.outputs.TODAY }}.png"
+          echo "================================================"

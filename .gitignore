@@ -1,0 +1,7 @@
+node_modules/
+reports/*.html
+reports/*.json
+reports/*.md
+reports/*.txt
+logs/
+*.log
