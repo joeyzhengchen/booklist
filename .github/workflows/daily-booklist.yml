@@ -14,6 +14,10 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 
     steps:
       # ============ 检出代码 ============
@@ -102,27 +106,31 @@ jobs:
           cd booklist-site
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git add .
           if git diff --staged --quiet; then
             echo "无变更，跳过推送"
           else
             git commit -m "feat: 自动生成 ${{ steps.date.outputs.TODAY }} 书单 [skip ci]"
-            git push
+            git push origin gh-pages
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Step 6 - 回存数据状态到主分支
         run: |
-          # 把 daily_books.js 产生的状态文件（yesterday_books.json 等）提交回主分支
-          # 保证下次云端运行时能基于正确的历史数据判断"本日新增"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git add data/yesterday_books.json data/recommend_history.json data/preferences.json
           if git diff --staged --quiet; then
             echo "数据无变更，跳过提交"
           else
             git commit -m "chore: 更新采集数据状态 ${{ steps.date.outputs.TODAY }} [skip ci]"
-            git push
+            git push origin main
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # ============ 结果汇总 ============
 

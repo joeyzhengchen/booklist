@@ -42,9 +42,12 @@ const EXCLUDE_KEYWORDS = [
 // ============ 日期工具 ============
 function getToday() {
   const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
   return {
     year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate(),
-    dateStr: now.toISOString().split('T')[0],
+    dateStr: `${year}-${month}-${day}`,
     fetchTime: now.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }),
   };
 }
