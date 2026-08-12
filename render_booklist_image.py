@@ -67,20 +67,55 @@ for _cloud_dir in ["/usr/share/fonts", "/usr/local/share/fonts"]:
     if os.path.isdir(_cloud_dir):
         FONT_DIRS.insert(0, _cloud_dir)
 
+def _walk_font_files(dirs):
+    """递归枚举字体目录下的所有字体文件（ttf/otf/ttc/ttx）"""
+    seen = set()
+    for d in dirs:
+        if not os.path.isdir(d):
+            continue
+        for root, _subdirs, files in os.walk(d):
+            for fn in files:
+                if fn.lower().endswith((".ttf", ".otf", ".ttc", ".ttx")):
+                    full = os.path.join(root, fn)
+                    if full not in seen:
+                        seen.add(full)
+                        yield full
+
+def _list_font_files_shallow(dirs):
+    """仅枚举字体目录顶层（兼容老版本/降级场景）"""
+    seen = set()
+    for d in dirs:
+        if not os.path.isdir(d):
+            continue
+        for fn in os.listdir(d):
+            if fn.lower().endswith((".ttf", ".otf", ".ttc", ".ttx")):
+                full = os.path.join(d, fn)
+                if full not in seen:
+                    seen.add(full)
+                    yield full
+
 def find_font(name_pattern, size):
-    for fd in FONT_DIRS:
-        if not os.path.isdir(fd): continue
-        for fn in os.listdir(fd):
-            fl = fn.lower()
-            if name_pattern.lower() in fl and fl.endswith(('.ttf', '.otf', '.ttc')):
-                try: return ImageFont.truetype(os.path.join(fd, fn), size)
-                except: continue
-    for fd in FONT_DIRS:
-        if not os.path.isdir(fd): continue
-        for fn in os.listdir(fd):
-            if fn.lower().endswith(('.ttf', '.otf', '.ttc')):
-                try: return ImageFont.truetype(os.path.join(fd, fn), size)
-                except: continue
+    # 优先递归查找（包括 /usr/share/fonts/opentype/noto 等子目录）
+    for full in _walk_font_files(FONT_DIRS):
+        fl = os.path.basename(full).lower()
+        if name_pattern.lower() in fl:
+            try:
+                return ImageFont.truetype(full, size)
+            except Exception:
+                continue
+    # 兜底：任意字体文件（递归）
+    for full in _walk_font_files(FONT_DIRS):
+        try:
+            return ImageFont.truetype(full, size)
+        except Exception:
+            continue
+    # 最后兜底：仅顶层目录（如 Windows 字体直接躺在 C:\Windows\Fonts）
+    for full in _list_font_files_shallow(FONT_DIRS):
+        try:
+            return ImageFont.truetype(full, size)
+        except Exception:
+            continue
+    # 终极兜底：PIL 默认字体（无中文，会乱码，仅作保底）
     return ImageFont.load_default()
 
 FONT_HUGE  = find_font("msyhbd", 44) or find_font("simhei", 44)
