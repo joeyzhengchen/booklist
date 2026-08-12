@@ -396,6 +396,12 @@ function loadYesterdayBooks(yesterdayStr) {
  * 注意：只回溯当月数据，不跨月继承（月初时继承列表为空）
  */
 function loadAllPriorMonthBooks(dateStr) {
+  // 云端多次运行时，reports/ 是空的（git-ignored 临时目录），
+  // 但 booklist-site/data/reports/ 会通过 gh-pages 跨次保留，作为兜底数据源。
+  const searchDirs = [
+    CONFIG.OUTPUT_DIR,
+    path.join(CONFIG.OUTPUT_DIR, '..', 'booklist-site', 'data', 'reports'),
+  ];
   const p = path.join(CONFIG.DATA_DIR, 'yesterday_books.json');
   if (!fs.existsSync(p)) return [];
   // 当月前缀（如 "2026-07"），只继承同月数据
@@ -408,9 +414,15 @@ function loadAllPriorMonthBooks(dateStr) {
       if (d >= dateStr) continue;
       if (!d.startsWith(currentMonthPrefix)) continue; // 跨月数据不继承
       if (!Array.isArray(ids) || ids.length === 0) continue;
-      const reportPath = path.join(CONFIG.OUTPUT_DIR, `${d}.json`);
-      if (!fs.existsSync(reportPath)) continue;
-      const reportData = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
+      // 在多个候选目录中查找今日的报告 JSON
+      let reportData = null;
+      for (const dir of searchDirs) {
+        const reportPath = path.join(dir, `${d}.json`);
+        if (fs.existsSync(reportPath)) {
+          try { reportData = JSON.parse(fs.readFileSync(reportPath, 'utf-8')); break; } catch (e) {}
+        }
+      }
+      if (!reportData) continue;
       const monthBooks = reportData.monthBooks || [];
       for (const b of monthBooks) {
         if (!b.subjectId || !b.title) continue;

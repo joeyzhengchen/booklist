@@ -70,6 +70,14 @@ jobs:
         env:
           NODE_OPTIONS: ""
 
+      # 把当日报告 JSON 也备份到 booklist-site/data/reports/，
+      # 让下次云端运行时可通过 gh-pages checkout 获取历史 carry-over 数据。
+      - name: Step 1b - 备份当日报告 JSON 到 booklist-site
+        run: |
+          mkdir -p booklist-site/data/reports
+          cp reports/${{ steps.date.outputs.TODAY }}.json booklist-site/data/reports/${{ steps.date.outputs.TODAY }}.json
+          echo "📦 已备份报告: booklist-site/data/reports/${{ steps.date.outputs.TODAY }}.json"
+
       # ============ 生成输出 ============
 
       - name: Step 2 - 生成手机适配 HTML
