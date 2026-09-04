@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>人文社科新书速递 · 2026-09-04</title>
+<style>
+  :root {
+    --bg: #f8f5f0;
+    --card: #ffffff;
+    --text: #2c2416;
+    --text2: #6b5e4e;
+    --text3: #9b8c7a;
+    --accent: #c9a96e;
+    --accent2: #8b6914;
+    --new: #d44;
+    --border: #e8e0d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --radius: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+  }
+  .page {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+  }
+
+  /* --- 头部 --- */
+  .hero {
+    background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
+    color: #fff;
+    padding: 44px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .hero .badge {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
+  }
+  .hero h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  .hero .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .hero .stat {
+    font-size: 12px;
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hero .stat em {
+    font-style: normal;
+    font-weight: 600;
+    color: #f0d78c;
+  }
+
+  /* --- 分区 --- */
+  .section {
+    padding: 20px 16px 0;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .section-head h3 {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-head .count {
+    font-size: 12px;
+    color: var(--text3);
+    font-weight: 400;
+  }
+
+  /* --- 书籍卡片 --- */
+  .book-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+  .book-card:active { transform: scale(0.985); }
+  .book-card .new-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 10px;
+    background: var(--new);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 8px;
+  }
+  .book-card .cover-wrap {
+    flex-shrink: 0;
+    width: 76px; height: 106px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f0ece6;
+  }
+  .book-card .cover-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .book-card .no-cover {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #ccc; font-size: 10px;
+  }
+  .book-card .info { flex: 1; min-width: 0; }
+  .book-card .info .title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: 70px; /* 避让 "本日新" 徽章 */
+  }
+  .book-card .info .author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .book-card .info .meta {
+    font-size: 11px;
+    color: var(--text3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+  }
+  .book-card .info .meta .sep { color: #d5cec4; }
+  .book-card .info .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #d4a017;
+    font-weight: 500;
+  }
+  .book-card .info .desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .book-card .info .link-row {
+    margin-top: 6px;
+  }
+  .book-card .info .link-row a {
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* --- 推荐卡片 --- */
+  .rec-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    padding: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .rec-card .rec-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .rec-card .rec-title {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .rec-card .rec-tag {
+    font-size: 10px;
+    background: #f0e6d2;
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+  .rec-card .rec-author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+  .rec-card .rec-meta {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .rec-card .rec-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .rec-card .rec-reason {
+    font-size: 12px;
+    color: var(--accent2);
+    background: #fef9e7;
+    padding: 8px 10px;
+    border-radius: 6px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .rec-card .rec-reason span.label {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  /* --- 爱心按钮 --- */
+  .heart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border: 1px solid #e0d0d0;
+    border-radius: 18px;
+    font-size: 13px;
+    color: #999;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .heart-btn:active {
+    border-color: #d44;
+    color: #d44;
+    background: #fef5f5;
+  }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
+  .heart-btn .heart { font-size: 16px; }
+
+  /* --- 页脚 --- */
+  .footer {
+    text-align: center;
+    color: var(--text3);
+    font-size: 11px;
+    padding: 24px 16px 8px;
+    line-height: 1.6;
+  }
+
+  /* --- 分隔线 --- */
+  .divider {
+    margin: 8px 16px;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+</head>
+<body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
+<div class="page">
+
+<!-- 头部 -->
+<div class="hero">
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-09-04</span>
+  </div>
+  <h1>人文社科新书速递</h1>
+  <div class="stats-row">
+    <div class="stat">📚 本月 <em>8</em> 本</div>
+    <div class="stat">🆕 新增 <em>0</em> 本</div>
+    <div class="stat">🌟 推荐 <em>5</em> 本</div>
+  </div>
+</div>
+
+<!-- 本月新书 -->
+<div class="section">
+  <div class="section-head">
+    <h3>📚 本月新书</h3>
+    <span class="count">8 本 · 9月出版</span>
+  </div>
+
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/38381390.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">1. 勇气呼唤勇气</div>
+    <div class="author">✍ [英] 珍妮特·温特森</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-09<span class="sep"> · </span>💰 48.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>“我们WoMen”书系： 经由我们，看见世界。 珍妮特·温特森公共随笔集 属于当代的女性平等宣言 📫百年前，英国女性走上街头，砸碎窗户、炸毁邮箱、绝食抗议，只为争取一项基本权利——投票权 📢百年后，珍妮特·温特森站在英国国会大厦，追问同一个问题：我们真的平等了吗？ 📕这是一本关于过去、现在与未来的书： 勇气会唤醒勇气，而平等，永远不是一件“已经完成”的事 🌊 编辑推荐： ◎当“淑女们”决定不“淑女”了 ——生动追忆百年前女性争取选举权的抗争历程 ★她们把锤子藏在暖手筒里，爬上国会屋顶揭瓦片。她们炸邮箱、砸橱窗、绝食抗议，被粗橡胶管强行喂食，喉咙永久损伤。她们坐牢，出狱，再坐牢。男人说她们“不成体统”，她们说：“我们本来也没打算保持体面。” ★不体面的手段换来了体面的结果——1918年部分女性获得投票权，1928年全部女性平等。没有一枪一弹，只有砸碎的...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38381390/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/37394328.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">2. 沙墓</div>
+    <div class="author">✍ [印度]吉丹贾丽·斯里</div>
+    <div class="meta">🏠 浙江教育出版社<span class="sep"> · </span>📅 2026-09</div>
+    <div class='desc'>布克国际文学奖获奖作品 连续击败托卡尔丘克和约恩福瑟两位诺奖得主获得桂冠。历史上第一位获奖的南亚本土语种作家，也是印地语文学史上第一位获得顶级国际文学奖的作家。 横扫国际奖项 获得或提名英国笔会文学奖、英国沃里克女性文学奖、 美国现代语言协会文学奖、法国埃米尔・吉梅文学 奖、印度JCB文学奖、国际都柏林文学奖。 一个八十岁的女人突然决定成为一个女性主义者 过去和现在、年轻和衰老、现实和魔幻、男人和女人、印度教和伊斯兰教，它几乎囊括了所有可能发生的矛盾主题。在那个挤满了男人的国度发出自己的声音，她告诉大家：“先生们，边界是用来跨越的！” 历时四年，《印地语汉语翻译教程》编写者廖波教授印地语亲译。 作者专文写给中国读者，全球独享。 超人气插画师卤猫绘制封面，内外双封面特种纸烫专金。 八十岁时，母亲变得自私起来。 好像她已经一层一层地褪去了自己的外衣，妻子...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37394328/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/37870976.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">3. 法老的密室</div>
+    <div class="author">✍ [日] 白川尚史</div>
+    <div class="meta">🏠 新星出版社<span class="sep"> · </span>📅 2026-09</div>
+    <div class='desc'>古埃及，已故并被制成木乃伊的祭司书吏塞提，因心脏缺失而无法接受冥界的审判。为了找回缺失的心脏，塞提重返人间，在调查自己死亡真相时，却发现了一个惊人的阴谋。先王的木乃伊，原本被安放在一座封闭的墓室中，却在葬礼途中神秘消失，随后现身一处神庙。为了拯救埃及，塞提决定揭开木乃伊消失的真相。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37870976/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/38552192.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">4. 谁杀了武大郎？</div>
+    <div class="author">✍ 时晨</div>
+    <div class="meta">🏠 北京联合出版公司<span class="sep"> · </span>📅 2026-09</div>
+    <div class='desc'>武大郎死了，脸色紫黑，七窍流血！ 阳谷县人尽皆知，毒杀亲夫的凶手，必是潘金莲与西门庆。 但是这一次，故事有所不同—— 大郎没喝药！ 潘金莲手里的那包砒霜，原封未动；西门庆从未下毒。 那么，凶手就一定藏在紫石街的街坊邻里之中。 是酒店掌柜、纸马铺老板，还是银铺匠人，抑或是馉饳店老汉？ 武松外出办事，归期仅剩十日。 潘金莲、西门庆、王婆——三人被迫组成“侦探联盟”。 他们要在十天之内，抢在武松那把刀落下之前，找出那个嫁祸于人的真凶。 可越查越发现，真相远比他们想象的更加荒诞……</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38552192/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/38590265.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">5. 才女彻夜未眠：近代中国女性叙事文学的兴起</div>
+    <div class="author">✍ 胡晓真</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-09<span class="sep"> · </span>💰 88<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>不能追求英雄事业的女人如何才能证明自己曾经存在？如何逃避死后千年不寤的宿命？她们于是移植了男性“文章乃千秋大业”的信念，选择寄壮志于书写，芸窗笔耕不倦，直到宵迟更深。 聚焦中国最早的女性小说家与她们的作品，探讨古代女性的存在焦虑与权力欲望，为理解传统女性的精神突围提供全新维度。王德威、李惠仪、夏晓虹一致推荐！ 1.一本讨论中国最早的女性小说家与她们的作品的文学文化史著作，填补女性叙事文学研究空白，王德威、李惠仪、夏晓虹一致推荐，王德威称其为近现代女性书写及文化研究的里程碑。 2.基于明清女性小说家的创作实践，梳理女性叙事文学传统的建立与发展。以17—18世纪在中国南方盛行的弹词小说为材料，以江南才女文化为背景，探讨明清时期女性作家在阅读、阐释与创作活动中的心理状态、思考方式，以及她们如何用文字表达自我。 3.揭示中国古代传统女性对于掌握社会权力的欲望...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38590265/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/38612957.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">6. 留白</div>
+    <div class="author">✍ 程乐松</div>
+    <div class="meta">🏠 中信出版集团<span class="sep"> · </span>📅 2026-09<span class="sep"> · </span>💰 69<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>时代变化太快，我们常常感到生活过于致密。但是，这种致密究竟是生活本来的样貌，还是我们自己的感受？我们面对的许多问题，究竟是生活本身带来的，还是源于我们对确定性的执着？ 在本书中，北京大学哲学系教授程乐松从五个方面出发，重新思考在日常生活中十分重要却常被忽略的问题： 关于不确定性：肯认人的有限，警惕确定性陷阱； 关于自我与他人：在彼此之间建立开放而包容的心灵空间； 关于技术与人：将自我理解建立在厚重历史和温暖传统之上； 关于表达与理解：在众声喧嚣中，回到自身，重建表达力； 关于自我价值：用自我尊重而非“社会功利评价”来标定生活的意义。 所有的道理都是抽象的，而生活太具体了。作为一个身处局中、时常也难以自拔的人，程乐松把对这些问题的思考和分析过程摊开来。我们未必能找到问题的答案，但可以看清问题的轮廓，以及它产生的机制。看清了，我们才不至于被它裹着走。 留...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38612957/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/37322645.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">7. 汉政与王道：汉代政治演进与治理模式变迁</div>
+    <div class="author">✍ 陈苏镇</div>
+    <div class="meta">🏠 生活·读书·新知三联书店<span class="sep"> · </span>📅 2026-09<span class="sep"> · </span>💰 138.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>⊙ 站在史学前沿的通识性读物，跨界阅读的学术精品 ⊙ 从政治与政治文化的视角，通贯地讲述汉代历史 ⊙ 尝试探讨奠基时代国家治理基本形态的建立与演进 本书中，作者的学术特色非常鲜明，着力于打通政治和政治文化史，将各自独立的演进脉络与相互关联、相互推动结合起来考察；融汇大量一手文献，擅长在史事叙述中提炼新见，沉稳凝练、通畅浅明的行文风格，均达到较高的水准。 对比讲谈社、哈佛大学等多卷本中国史，本书更为独特性与通识性、原创性的结合。就两汉奠定2000年古代社会的基础体制而言，本书旨在更根本更核心的问题上着力挖掘，引导读者深入思考，开启一段更长远的阅读与求知的历程。 几十年来，北大历史系一直是中国古代史，特别是政治史、制度史的研究重镇，上承20世纪现代中国史学传统，汇聚几代优秀学人。《&lt;春秋&gt;与“汉道”》（陈苏镇著）《士大夫政治演生史稿》（阎步克著）的秦汉政...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37322645/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-09-04/38613586.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">8. 失语的皇后：南齐权力嬗变中的个体生命</div>
+    <div class="author">✍ 郭硕</div>
+    <div class="meta">🏠 山西人民出版社<span class="sep"> · </span>📅 2026-09<span class="sep"> · </span>💰 98.00<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>本书以南齐文安皇后（宣德皇后、宣德太后）王宝明的生平经历为线索，勾勒出南朝宋、齐、梁政权嬗代的历程以及其中许多人物的命运，揭示出南朝皇权更迭背后的权力运作机制和复杂人性。王宝明作为一名出身高门的宫廷女性，被动参与了南齐中后期以及齐梁嬗代的权力更迭，是见证历史进程的重要人物，然而其生平却被传统的历史书写所遮蔽并污名化，成了无法为自己辩白的“失语者”。本书深入发掘辨析史料，从零星片段的记载中复原出王宝明的生命轨迹，以及同时代诸多人物在权力旋涡中的个体遭际与抉择，把脸谱化的历史人物还原为有血有肉的具体的人。作者关注历史洪流中的弱势群体，将“荡妇”“妖后”等南齐后宫人物的负面标签，置于权力更迭与历史书写的背景下考察，拨开史书记载的迷雾，揭示其作为政治斗争与舆论建构工具的性质，从冰冷的史料中重构有温度的历史。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38613586/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="section-head">
+    <h3>🌟 当日推荐</h3>
+    <span class="count">5 本精选</span>
+  </div>
+
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">1. 一个人的村庄</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 刘亮程</div>
+  <div class="rec-meta">📅 2006-01 · 🏠 春风文艺出版社</div>
+  <div class='rec-desc'>在新疆黄沙梁，刘亮程用诗意的笔触书写村庄里的风、雪、泥土、驴和一草一木。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>刘亮程让每棵草都有了尊严。如果你觉得生活喧嚣不安，这本书会让你安静下来，像一株植物一样感受时间的流动——原来一个人在一个村庄里，就可以拥有整个宇宙。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%9D%91%E5%BA%84%20%E5%88%98%E4%BA%AE%E7%A8%8B" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-046">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">2. 简爱</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 夏洛蒂·勃朗特</div>
+  <div class="rec-meta">📅 2015-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>孤儿简爱从逆境中成长，在桑菲尔德庄园遇到了她的心灵伴侣罗切斯特先生。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;我是自由的，也是有意志的。&quot;简爱在平等与尊严上的坚守，放在今天依然振聋发聩。这不是一个小女孩的灰姑娘故事，而是一个人如何在最难的处境里守住自己的灵魂。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%AE%80%E7%88%B1%20%E5%A4%8F%E6%B4%9B%E8%92%82%C2%B7%E5%8B%83%E6%9C%97%E7%89%B9" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-116">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">3. 李尔王</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 威廉·莎士比亚</div>
+  <div class="rec-meta">📅 2013-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>年迈国王李尔将王国分给三个女儿，却遭到两个亲生女儿的背叛，走向疯狂。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>莎士比亚最黑暗的悲剧。李尔王的错误不是不爱女儿，而是要求女儿把爱量化——任何真实的情感一旦被计量，就开始失真。这是关于人性、权力和老年孤独的最沉痛警示。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E6%9D%8E%E5%B0%94%E7%8E%8B%20%E5%A8%81%E5%BB%89%C2%B7%E8%8E%8E%E5%A3%AB%E6%AF%94%E4%BA%9A" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-109">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">4. 西西弗神话</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 阿尔贝·加缪</div>
+  <div class="rec-meta">📅 2010-01 · 🏠 上海译文出版社</div>
+  <div class='rec-desc'>以西西弗推石的神话为比喻，系统阐述加缪的荒诞哲学。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;必须想象西西弗是幸福的。&quot;加缪在这句话里给了对生命意义的最有力回答——不是找到意义，而是在没有意义的情况下依然选择反抗和创造。这是最诚实也最有力量的哲学。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E8%A5%BF%E8%A5%BF%E5%BC%97%E7%A5%9E%E8%AF%9D%20%E9%98%BF%E5%B0%94%E8%B4%9D%C2%B7%E5%8A%A0%E7%BC%AA" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-170">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">5. 钢铁是怎样炼成的</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 尼古拉·奥斯特洛夫斯基</div>
+  <div class="rec-meta">📅 2007-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>保尔·柯察金通过革命实践成长为钢铁战士的故事。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;人最宝贵的是生命，生命对于每个人只有一次。&quot;这本书展示了一个人在极端苦难中如何靠信念和意志支撑下去——无论你信仰什么，这种精神力量本身是真实的。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E9%92%A2%E9%93%81%E6%98%AF%E6%80%8E%E6%A0%B7%E7%82%BC%E6%88%90%E7%9A%84%20%E5%B0%BC%E5%8F%A4%E6%8B%89%C2%B7%E5%A5%A5%E6%96%AF%E7%89%B9%E6%B4%9B%E5%A4%AB%E6%96%AF%E5%9F%BA" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-129">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+</div>
+
+<div class="footer">
+  <p>本报告由每日人文社科新书采集器自动生成</p>
+  <p>数据来源：豆瓣网 · 文学、历史、哲学、社科、文化、艺术、传记</p>
+  <p style="margin-top:4px;color:#bbb">📱 公网版：<a href="https://joeyzhengchen.github.io/booklist/" style="color:var(--accent2)">joeyzhengchen.github.io/booklist</a></p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.heart-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('liked');
+    const heart = this.querySelector('.heart');
+    if (this.classList.contains('liked')) {
+      heart.textContent = '♥';
+      this.style.borderColor = '#d44';
+      this.style.color = '#d44';
+      this.style.background = '#fef5f5';
+    } else {
+      heart.textContent = '♡';
+      this.style.borderColor = '#e0d0d0';
+      this.style.color = '#999';
+      this.style.background = '#fff';
+    }
+  });
+});
+</script>
+</body>
+</html>
