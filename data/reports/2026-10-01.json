@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-01",
+  "fetchTime": "2026/10/1 16:31:54",
+  "monthBooks": [
+    {
+      "title": "东德童话",
+      "author": "[德] 燕妮·埃彭贝克",
+      "publisher": "民主与建设出版社",
+      "pubDate": "2026-10",
+      "pubDateParsed": {
+        "year": 2026,
+        "month": 10,
+        "day": null,
+        "precision": "month",
+        "raw": "2026-10"
+      },
+      "price": "",
+      "binding": "",
+      "rating": "",
+      "ratingText": "",
+      "categories": [],
+      "description": "",
+      "url": "https://book.douban.com/subject/38622753/",
+      "cover": "https://img3.doubanio.com/view/subject/l/public/s35633502.jpg",
+      "subjectId": "38622753",
+      "isNewToday": true
+    },
+    {
+      "title": "达洛维夫人在邦德街",
+      "author": "(英) 弗吉尼亚·伍尔夫",
+      "publisher": "湖南文艺出版社",
+      "pubDate": "2026-10",
+      "pubDateParsed": {
+        "year": 2026,
+        "month": 10,
+        "day": null,
+        "precision": "month",
+        "raw": "2026-10"
+      },
+      "price": "",
+      "binding": "",
+      "rating": "",
+      "ratingText": "",
+      "categories": [],
+      "description": "",
+      "url": "https://book.douban.com/subject/38632522/",
+      "cover": "https://img2.doubanio.com/view/subject/l/public/s35616551.jpg",
+      "subjectId": "38632522",
+      "isNewToday": true
+    },
+    {
+      "title": "学徒生涯",
+      "author": "[巴西]克拉丽丝·李斯佩克朵",
+      "publisher": "人民文学出版社",
+      "pubDate": "2026-10-1",
+      "pubDateParsed": {
+        "year": 2026,
+        "month": 10,
+        "day": 1,
+        "precision": "day",
+        "raw": "2026-10-1"
+      },
+      "price": "",
+      "binding": "",
+      "rating": "",
+      "ratingText": "",
+      "categories": [],
+      "description": "",
+      "url": "https://book.douban.com/subject/38626128/",
+      "cover": "https://img3.doubanio.com/view/subject/l/public/s35609892.jpg",
+      "subjectId": "38626128",
+      "isNewToday": true
+    }
+  ],
+  "recommendations": {
+    "preferenceBased": [
+      {
+        "id": "pool-031",
+        "title": "海边的卡夫卡",
+        "author": "村上春树",
+        "description": "十五岁少年田村卡夫卡离家出走，在现实与超现实交汇的迷宫中寻找自我。",
+        "publisher": "上海译文出版社",
+        "pubDate": "2007-07",
+        "genres": [
+          "超现实",
+          "日本文学"
+        ],
+        "tags": [
+          "出走",
+          "命运",
+          "自我"
+        ],
+        "reason": "村上的精神迷宫。每个少年都曾是田村卡夫卡——渴望逃离，渴望寻找，渴望在最深的孤独里辨认出自己是谁。走出迷宫，你才能成为世界上最顽强的十五岁少年。"
+      },
+      {
+        "id": "pool-060",
+        "title": "洛丽塔",
+        "author": "弗拉基米尔·纳博科夫",
+        "description": "中年教授痴迷于十二岁女孩，纳博科夫用极度精美的文字包裹了一个道德上无可辩护的故事。",
+        "publisher": "上海译文出版社",
+        "pubDate": "2009-01",
+        "genres": [
+          "美国文学",
+          "心理小说"
+        ],
+        "tags": [
+          "语言",
+          "痴迷",
+          "道德",
+          "美文"
+        ],
+        "reason": "\"洛丽塔，我生命之光，欲望之火。\"世界文学中最美的开头之一，也是最道德上复杂的故事。纳博科夫的语言技艺无与伦比——在谴责叙述者的同时，你无法不被那华丽的语言所迷惑。"
+      }
+    ],
+    "random": [
+      {
+        "id": "pool-168",
+        "title": "叫魂",
+        "author": "孔飞力",
+        "description": "通过1768年清朝的\"叫魂\"案，深入分析中国君主制与官僚体制的内在矛盾。",
+        "publisher": "生活·读书·新知三联书店",
+        "pubDate": "2012-01",
+        "genres": [
+          "历史",
+          "中国研究"
+        ],
+        "tags": [
+          "清朝",
+          "官僚体制",
+          "恐慌",
+          "权力"
+        ],
+        "reason": "通过一场小小的\"叫魂\"恐慌，孔飞力看穿了中国传统权力结构的全部秘密——皇权与官僚之间的博弈、民间恐惧与国家权力的纠缠。小切口，大历史，这才是真正好的历史写作。"
+      },
+      {
+        "id": "pool-131",
+        "title": "雷雨",
+        "author": "曹禺",
+        "description": "一个封建大家族两代人之间的爱恨情仇，在一个雷雨之夜走向毁灭。",
+        "publisher": "人民文学出版社",
+        "pubDate": "2012-01",
+        "genres": [
+          "戏剧",
+          "中国现代文学"
+        ],
+        "tags": [
+          "命运",
+          "阶级",
+          "悲剧"
+        ],
+        "reason": "中国现代戏剧史上最强大的作品。命运像一张网，把所有人都困住了——蘩漪、周萍、四凤，每个人都是受害者，也都是加害者。雷雨夜里的一声爆炸，震碎的是整个旧时代的道德秩序。"
+      },
+      {
+        "id": "pool-092",
+        "title": "把时间当作朋友",
+        "author": "李笑来",
+        "description": "关于时间管理、自我成长和思维方式的实用书，影响了无数中国年轻读者。",
+        "publisher": "电子工业出版社",
+        "pubDate": "2010-07",
+        "genres": [
+          "自我提升",
+          "非虚构"
+        ],
+        "tags": [
+          "时间管理",
+          "成长",
+          "思维方式"
+        ],
+        "reason": "\"时间不能被管理，能被管理的只有我们自己。\"这个核心洞见改变了很多人对时间和成长的认识。实操性极强，且观点有思想深度，适合在迷茫时期反复翻阅。"
+      }
+    ]
+  }
+}
