@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>人文社科新书速递 · 2026-10-02</title>
+<style>
+  :root {
+    --bg: #f8f5f0;
+    --card: #ffffff;
+    --text: #2c2416;
+    --text2: #6b5e4e;
+    --text3: #9b8c7a;
+    --accent: #c9a96e;
+    --accent2: #8b6914;
+    --new: #d44;
+    --border: #e8e0d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --radius: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+  }
+  .page {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+  }
+
+  /* --- 头部 --- */
+  .hero {
+    background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
+    color: #fff;
+    padding: 44px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .hero .badge {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
+  }
+  .hero h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  .hero .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .hero .stat {
+    font-size: 12px;
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hero .stat em {
+    font-style: normal;
+    font-weight: 600;
+    color: #f0d78c;
+  }
+
+  /* --- 分区 --- */
+  .section {
+    padding: 20px 16px 0;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .section-head h3 {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-head .count {
+    font-size: 12px;
+    color: var(--text3);
+    font-weight: 400;
+  }
+
+  /* --- 书籍卡片 --- */
+  .book-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+  .book-card:active { transform: scale(0.985); }
+  .book-card .new-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 10px;
+    background: var(--new);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 8px;
+  }
+  .book-card .cover-wrap {
+    flex-shrink: 0;
+    width: 76px; height: 106px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f0ece6;
+  }
+  .book-card .cover-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .book-card .no-cover {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #ccc; font-size: 10px;
+  }
+  .book-card .info { flex: 1; min-width: 0; }
+  .book-card .info .title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: 70px; /* 避让 "本日新" 徽章 */
+  }
+  .book-card .info .author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .book-card .info .meta {
+    font-size: 11px;
+    color: var(--text3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+  }
+  .book-card .info .meta .sep { color: #d5cec4; }
+  .book-card .info .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #d4a017;
+    font-weight: 500;
+  }
+  .book-card .info .desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .book-card .info .link-row {
+    margin-top: 6px;
+  }
+  .book-card .info .link-row a {
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* --- 推荐卡片 --- */
+  .rec-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    padding: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .rec-card .rec-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .rec-card .rec-title {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .rec-card .rec-tag {
+    font-size: 10px;
+    background: #f0e6d2;
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+  .rec-card .rec-author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+  .rec-card .rec-meta {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .rec-card .rec-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .rec-card .rec-reason {
+    font-size: 12px;
+    color: var(--accent2);
+    background: #fef9e7;
+    padding: 8px 10px;
+    border-radius: 6px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .rec-card .rec-reason span.label {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  /* --- 爱心按钮 --- */
+  .heart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border: 1px solid #e0d0d0;
+    border-radius: 18px;
+    font-size: 13px;
+    color: #999;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .heart-btn:active {
+    border-color: #d44;
+    color: #d44;
+    background: #fef5f5;
+  }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
+  .heart-btn .heart { font-size: 16px; }
+
+  /* --- 页脚 --- */
+  .footer {
+    text-align: center;
+    color: var(--text3);
+    font-size: 11px;
+    padding: 24px 16px 8px;
+    line-height: 1.6;
+  }
+
+  /* --- 分隔线 --- */
+  .divider {
+    margin: 8px 16px;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+</head>
+<body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
+<div class="page">
+
+<!-- 头部 -->
+<div class="hero">
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-10-02</span>
+  </div>
+  <h1>人文社科新书速递</h1>
+  <div class="stats-row">
+    <div class="stat">📚 本月 <em>4</em> 本</div>
+    <div class="stat">🆕 新增 <em>1</em> 本</div>
+    <div class="stat">🌟 推荐 <em>5</em> 本</div>
+  </div>
+</div>
+
+<!-- 本月新书 -->
+<div class="section">
+  <div class="section-head">
+    <h3>📚 本月新书</h3>
+    <span class="count">4 本 · 10月出版</span>
+  </div>
+
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-10-02/38612861.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">1. 二十世纪西方文学理论：新译本</div>
+    <div class="author">✍ [英]特里·伊格尔顿</div>
+    <div class="meta">🏠 北京大学出版社<span class="sep"> · </span>📅 2026-10<span class="sep"> · </span>💰 83.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>本书以清晰晓畅的语言，系统梳理了二十世纪以来西方文学理论的发展脉络，对俄国形式主义、现象学、诠释学、接受理论、结构主义、符号学、后结构主义、精神分析、女性主义等重要理论流派做出了深入而富有洞见的阐释，并始终将文学理论置于社会历史与思想文化的广阔背景中加以考察。 本书既是一部西方文学理论导论，也是一部关于现代人文思想的导读。它不仅帮助读者掌握文学理论的基本概念和方法，更引导人们思考文学是什么、阅读意味着什么，以及文学与历史、政治、意识形态和人的生活之间的复杂关系。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38612861/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  <div class="new-badge">本日新</div>
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-10-02/38626128.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">2. 学徒生涯</div>
+    <div class="author">✍ [巴西]克拉丽丝·李斯佩克朵</div>
+    <div class="meta">🏠 人民文学出版社<span class="sep"> · </span>📅 2026-10-01</div>
+    <div class='desc'>克拉丽丝·李斯佩克朵非常擅长书写女性的感受，却极少像她在《学徒生涯》里这样，如此直接地正面处理感受最盛大的形式之一——爱情。 这本书还是标志性的李斯佩克朵风格，丰沛的感受力从每一个亲密或孤独的瞬间萌发，让细微的身体经验成长为词汇与情感的浓荫。故事仿佛全无理性，却又有着无比精密的语言，用充满了呼吸感的起伏邀请读者一同共情，见证爱的主体如何在欲望与恐惧的辩证中逐渐成形。 毕竟，对于李斯佩克朵而言，哪怕是爱情，也不过是人生终极存在的一个注脚。爱的危险，恰在于它点亮了通往生命本源的路径。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38626128/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-10-02/38632522.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">3. 达洛维夫人在邦德街</div>
+    <div class="author">✍ (英) 弗吉尼亚·伍尔夫</div>
+    <div class="meta">🏠 湖南文艺出版社<span class="sep"> · </span>📅 2026-10</div>
+    <div class='desc'>达洛维夫人说要自己去买手套。她走上街的时候大本钟开始敲响了。 ——弗吉尼亚·伍尔夫（《达洛维夫人在邦德街》） 弗吉尼亚·伍尔夫写作的核心，是一种融入世界并与之疏离的运动，这就是达洛维夫人的运动。 ——安妮·埃尔诺 《达洛维夫人》描绘了克拉丽莎·达洛维生活中的一天。她正精心安排着一场盛大的聚会最后的细节。在这部作品之前，伍尔夫还以达洛维夫人举办的聚会为主题，创作了一系列短篇小说，如《达洛维夫人在邦德街》《爱同类的人》《引见》等，深入刻画了这位迷人的女主人公及其宾客最细微的内心活动。 本书首次完整收录8篇“达洛维夫人”系列短篇故事，特别增补一篇遗稿《简单的旋律》。另有《墙上的印记》《存在性的时刻——斯莱特家的别针都没有尖头》等7篇伍尔夫短篇名作全新译文，经典再现。 —————————— △15个短篇杰作，实践《一间自己的房间》的女性文学理想： “更短、更...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38632522/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-10-02/38622753.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">4. 东德童话</div>
+    <div class="author">✍ [德] 燕妮·埃彭贝克</div>
+    <div class="meta">🏠 民主与建设出版社<span class="sep"> · </span>📅 2026-10</div>
+    <div class='desc'>《老孩子的故事》 人们在街头发现一个提着桶四处游荡的女孩。警察来了，失踪儿童名单里找不到她的名字，于是他们将她送到“儿童之家”。“儿童之家”的围墙很高，女孩对此感到高兴，她终于可以远离外面的世界了…… 《文字之书》 “我”正在学习词汇。爸爸和妈妈。球 。汽车 。妈妈指着两个衣袍鼓胀的黑衣天使。它们手牵着手，身姿挺拔地从远方的天空垂直朝着下方的大海坠落。为什么是黑色呢？“我”问。外面四处都是警报。人们在消失。先是那些人，然后是他们的朋友，接着是那些纪念他们的人，之后是每个担惊受怕的人，最后是所有人。 ◎作品看点 1.诡谲童话×怪诞梦魇×现实寓言：一部当之无愧的杰作，每个字都重若千钧—— 不会老去的街头孤儿，咿呀重复的识字歌谣，埃彭贝克在文本中注入了诡谲的魔力。 为什么她总像幽灵一般在这里游荡？为什么餐桌上总有“我”不认识的人？爸爸妈妈看不见...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38622753/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="section-head">
+    <h3>🌟 当日推荐</h3>
+    <span class="count">5 本精选</span>
+  </div>
+
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">1. 纳尔齐斯与歌尔德蒙</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 赫尔曼·黑塞</div>
+  <div class="rec-meta">📅 2018-03 · 🏠 上海译文出版社</div>
+  <div class='rec-desc'>理性的纳尔齐斯和感性的歌尔德蒙选择截然不同的人生，代表了人生两种极致。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>黑塞用两个少年的友谊探讨了人生最根本的命题：理性与感性的撕扯。歌尔德蒙的流浪是对美和生命力的礼赞——也许每个人内心都有这两个灵魂在对话。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%BA%B3%E5%B0%94%E9%BD%90%E6%96%AF%E4%B8%8E%E6%AD%8C%E5%B0%94%E5%BE%B7%E8%92%99%20%E8%B5%AB%E5%B0%94%E6%9B%BC%C2%B7%E9%BB%91%E5%A1%9E" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-034">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">2. 白痴</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 陀思妥耶夫斯基</div>
+  <div class="rec-meta">📅 2011-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>纯粹善良的梅诗金公爵来到圣彼得堡上流社会，却无法保护他所爱的人。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;美将拯救世界&quot;——这句话来自这本书。但陀氏的故事恰恰告诉我们：在这个世界上，纯粹的善良和纯粹的美往往不能拯救自己。梅诗金的悲剧是所有太善良的人的共同宿命，也是最令人心碎的诘问。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%99%BD%E7%97%B4%20%E9%99%80%E6%80%9D%E5%A6%A5%E8%80%B6%E5%A4%AB%E6%96%AF%E5%9F%BA" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-190">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">3. 麦克白</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 威廉·莎士比亚</div>
+  <div class="rec-meta">📅 2013-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>苏格兰大将麦克白在野心和妻子的怂恿下弑君篡位，最终走向毁灭。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>莎士比亚对权力最深刻的解剖。麦克白不是天生的恶人，而是一个被野心和恐惧吞噬的普通人——他告诉我们，通往地狱的路往往是从一个&quot;小小的让步&quot;开始的。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E9%BA%A6%E5%85%8B%E7%99%BD%20%E5%A8%81%E5%BB%89%C2%B7%E8%8E%8E%E5%A3%AB%E6%AF%94%E4%BA%9A" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-110">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">4. 穆斯林的葬礼</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 霍达</div>
+  <div class="rec-meta">📅 2012-01 · 🏠 北京十月文艺出版社</div>
+  <div class='rec-desc'>一个穆斯林玉器世家三代人的兴衰，交织着玉与月的命运，两段动人的爱情故事。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;玉殇&quot;和&quot;月殇&quot;两条线索交织成一部厚重的家族史诗。霍达让读者看到了一个不为大多数汉族读者所熟知的文化世界——用爱情和命运讲述出来的，是比课本更真实的民族融合史。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E7%A9%86%E6%96%AF%E6%9E%97%E7%9A%84%E8%91%AC%E7%A4%BC%20%E9%9C%8D%E8%BE%BE" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-128">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">5. 包法利夫人</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 福楼拜</div>
+  <div class="rec-meta">📅 2008-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>乡村医生的妻子爱玛因无聊的婚姻生活，沉溺于浪漫幻想，在外遇和债务中走向毁灭。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;包法利夫人，那就是我。&quot;福楼拜用爱玛的故事警示了所有人：沉溺在幻想中逃避现实，最终只会加速现实对你的报复。但最动人的是：爱玛的失败是人类渴望超越自身的失败，而不是她个人的错。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%8C%85%E6%B3%95%E5%88%A9%E5%A4%AB%E4%BA%BA%20%E7%A6%8F%E6%A5%BC%E6%8B%9C" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-113">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+</div>
+
+<div class="footer">
+  <p>本报告由每日人文社科新书采集器自动生成</p>
+  <p>数据来源：豆瓣网 · 文学、历史、哲学、社科、文化、艺术、传记</p>
+  <p style="margin-top:4px;color:#bbb">📱 公网版：<a href="https://joeyzhengchen.github.io/booklist/" style="color:var(--accent2)">joeyzhengchen.github.io/booklist</a></p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.heart-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('liked');
+    const heart = this.querySelector('.heart');
+    if (this.classList.contains('liked')) {
+      heart.textContent = '♥';
+      this.style.borderColor = '#d44';
+      this.style.color = '#d44';
+      this.style.background = '#fef5f5';
+    } else {
+      heart.textContent = '♡';
+      this.style.borderColor = '#e0d0d0';
+      this.style.color = '#999';
+      this.style.background = '#fff';
+    }
+  });
+});
+</script>
+</body>
+</html>
