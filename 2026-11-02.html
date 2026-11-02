@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>人文社科新书速递 · 2026-11-02</title>
+<style>
+  :root {
+    --bg: #f8f5f0;
+    --card: #ffffff;
+    --text: #2c2416;
+    --text2: #6b5e4e;
+    --text3: #9b8c7a;
+    --accent: #c9a96e;
+    --accent2: #8b6914;
+    --new: #d44;
+    --border: #e8e0d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --radius: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: 0;
+  }
+  .page {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+  }
+
+  /* --- 头部 --- */
+  .hero {
+    background: linear-gradient(160deg, #2c3e50 0%, #3d5366 50%, #4a6a7a 100%);
+    color: #fff;
+    padding: 44px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero .back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.2s;
+  }
+  .hero .back-btn:hover { color: #fff; }
+  .hero .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .hero .badge {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 1px;
+  }
+  .hero .date {
+    font-size: 13px;
+    opacity: 0.75;
+  }
+  .hero h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  .hero .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .hero .stat {
+    font-size: 12px;
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .hero .stat em {
+    font-style: normal;
+    font-weight: 600;
+    color: #f0d78c;
+  }
+
+  /* --- 分区 --- */
+  .section {
+    padding: 20px 16px 0;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .section-head h3 {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-head .count {
+    font-size: 12px;
+    color: var(--text3);
+    font-weight: 400;
+  }
+
+  /* --- 书籍卡片 --- */
+  .book-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+  .book-card:active { transform: scale(0.985); }
+  .book-card .new-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 10px;
+    background: var(--new);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 8px;
+  }
+  .book-card .cover-wrap {
+    flex-shrink: 0;
+    width: 76px; height: 106px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f0ece6;
+  }
+  .book-card .cover-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .book-card .no-cover {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #ccc; font-size: 10px;
+  }
+  .book-card .info { flex: 1; min-width: 0; }
+  .book-card .info .title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    color: var(--text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: 70px; /* 避让 "本日新" 徽章 */
+  }
+  .book-card .info .author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .book-card .info .meta {
+    font-size: 11px;
+    color: var(--text3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+  }
+  .book-card .info .meta .sep { color: #d5cec4; }
+  .book-card .info .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #d4a017;
+    font-weight: 500;
+  }
+  .book-card .info .desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .book-card .info .link-row {
+    margin-top: 6px;
+  }
+  .book-card .info .link-row a {
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* --- 推荐卡片 --- */
+  .rec-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    padding: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .rec-card .rec-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .rec-card .rec-title {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .rec-card .rec-tag {
+    font-size: 10px;
+    background: #f0e6d2;
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+  .rec-card .rec-author {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 2px;
+  }
+  .rec-card .rec-meta {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .rec-card .rec-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.55;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .rec-card .rec-reason {
+    font-size: 12px;
+    color: var(--accent2);
+    background: #fef9e7;
+    padding: 8px 10px;
+    border-radius: 6px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .rec-card .rec-reason span.label {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  /* --- 爱心按钮 --- */
+  .heart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border: 1px solid #e0d0d0;
+    border-radius: 18px;
+    font-size: 13px;
+    color: #999;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .heart-btn:active {
+    border-color: #d44;
+    color: #d44;
+    background: #fef5f5;
+  }
+  .detail-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #6b5e4e;
+    text-decoration: none;
+    padding: 4px 0;
+    margin-right: 10px;
+    transition: color 0.2s;
+  }
+  .detail-link:hover { color: #2c3e50; text-decoration: underline; }
+  .heart-btn .heart { font-size: 16px; }
+
+  /* --- 页脚 --- */
+  .footer {
+    text-align: center;
+    color: var(--text3);
+    font-size: 11px;
+    padding: 24px 16px 8px;
+    line-height: 1.6;
+  }
+
+  /* --- 分隔线 --- */
+  .divider {
+    margin: 8px 16px;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+</head>
+<body>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SX9PKL424Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-SX9PKL424Z');
+</script>
+
+<div class="page">
+
+<!-- 头部 -->
+<div class="hero">
+  <a class="back-btn" href="https://joeyzhengchen.github.io/booklist/" title="返回书单首页">←</a>
+  <div class="badge-row">
+    <span class="badge">DAILY BOOKS</span>
+    <span class="date">2026-11-02</span>
+  </div>
+  <h1>人文社科新书速递</h1>
+  <div class="stats-row">
+    <div class="stat">📚 本月 <em>8</em> 本</div>
+    <div class="stat">🆕 新增 <em>2</em> 本</div>
+    <div class="stat">🌟 推荐 <em>5</em> 本</div>
+  </div>
+</div>
+
+<!-- 本月新书 -->
+<div class="section">
+  <div class="section-head">
+    <h3>📚 本月新书</h3>
+    <span class="count">8 本 · 11月出版</span>
+  </div>
+
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/38940929.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">1. 清季的革命团体：1894—1911</div>
+    <div class="author">✍ 张玉法</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 98<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>著名历史学家张玉法先生经典著作，近代中国革命运动研究的里程碑之作。全面剖析清季革命历程，透视辛亥革命与近代中国政治变革的社会肌理。 1.著名历史学家张玉法先生关于近代中国革命运动史的经典著作，与《清季的立宪团体：1894—1911》构成姊妹篇。张玉法先生是清末民初革命与立宪运动研究领域的奠基者与开拓者之一，清季的革命团体与立宪团体两部著作，构成了其学术研究的底座。 2.首部以政治团体为单元系统梳理清末革命运动的学术专著。以 1894—1911 年为时间界限，系统梳理了清季各类革命团体的历史源流、组织架构与活动轨迹，详细考证了各团体之间的联络、融合与分化，为深入理解辛亥革命的发生与历史前奏提供了经典视角。 3.宏观视野与微观分析相结合。既从整体上把握清季革命团体的发展脉络与时代特征，又聚焦具体团体的运作模式与人际网络，清晰呈现了清季革命力量从分散到聚合...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38940929/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  <div class="new-badge">本日新</div>
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/39011288.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">2. 轻舟渡海：明清社会经济史的对话、评论与追迹</div>
+    <div class="author">✍ 赵思渊</div>
+    <div class="meta">🏠 广西师范大学出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 69<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>一部关于明清社会经济史的学术评论集。围绕科大卫、周健、寺田浩明等海内外学者的专著展开评述，聚焦财政、地域社会、法制等议题，展现丰富多彩的明清历史世界。 1.一部关于明清社会经济史的学术评论集。内容涵盖财政、地域社会、法制、数字人文等议题，围绕产权、贡赋体制、市场整合等明清社会经济史基础的理论问题展开，展现一个丰富多彩的明清历史世界。 2.围绕科大卫、周健、寺田浩明等海内外学者的代表性专著展开评述。书中既有赖惠敏《乾隆皇帝的荷包》对皇帝私财的探究，又有赵世瑜《猛将还乡》对“水上人”边缘群体的关注，作者通过一场场人与书的深度对话，跨越隔阂，在深度理解中传承学术。 3.集中呈现明清经济社会史前沿研究的问题意识、方法论争鸣。从“资本主义萌芽”“大分流”到“贡赋体制”“新清史”，本书覆盖近四十年明清社会经济史的关键议题与重要论争，帮助读者快速回溯相关领域的演进...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/39011288/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  <div class="new-badge">本日新</div>
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/38574975.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">3. 万王之王：伊朗1979</div>
+    <div class="author">✍ [波] 雷沙德·卡普希钦斯基</div>
+    <div class="meta">🏠 民主与建设出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 59.00元<span class="sep"> · </span>📖 精装</div>
+    <div class='desc'>◎ 作品看点 1. “新闻报道之王”，诺贝尔文学奖提名的“世纪记者”，在伊朗革命现场，看见一个古老民族的侧影，一个剧变时代的寓言。 玛格丽特·阿特伍德：“现在阅读这本书正当其时，因为它对那个世界此后不断上演的发展模式，展现出了惊人的先见之明。” . 2. 书写伊朗1979年革命的经典之作，入选《卫报》关于伊朗的十佳图书。 著名中东战地记者贝莱格：“一位绝非伊朗问题专家的记者，写下了关于那场革命蕞好的一本书。 . 3. 新闻告诉我们伊朗发生了什么，而卡普希钦斯基让我们看见，那里生活着谁，以及一切为何发生。 卡普希钦斯基一生亲历的第二十七次革命。从新闻现场深入历史肌理，让新闻标题后的真实伊朗重新显现。 . 4. 革命终结了一个王朝，但并未终结历史的循环。不只关于伊朗或中东，《万王之王》至今仍在为我们所处的世界提供惊人的洞见。 《逃离德黑兰》导演本·阿弗莱...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38574975/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/37434517.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">4. 素水</div>
+    <div class="author">✍ [加]安妮·卡森</div>
+    <div class="meta">🏠 花城出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 79.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>🔵🔵⚪ 古典与现代并置，新意与美感兼具 以瑰丽想象穿梭古今，写下温柔又锋利的哀歌 诺贝尔文学奖安妮·卡森撷萃之作 . ✒️编辑推荐 ◎ 打破诗与散文的文体壁垒，将诗歌的灵动隐喻、内在节奏和散文的思辨话语相融；文字简洁明丽，并置古典典故与现代思绪，大胆拓展语言与文学形式的边界，兼具惊艳的创造力与深厚的学识。 ◎ 诗文集《素水》以奇崛想象构筑跨时空的文学场域：虚构对古希腊诗人的现代访谈，穿插兰花、奥维德等主题的微型讲座，幻想缪斯现身现象学会议，用文字摄制神秘小镇，更以一场朝圣探寻水的人类学，在虚实交织间叩问记忆与哀伤。 ◎ 安妮·卡森是加拿大知名诗人、译者与古典学者，长期教授古典学、比较文学与创意写作，所译萨福残篇与古希腊悲剧，斩获十余项文学大奖，以古典学识浇灌独树一帜的当代写作。 ◎ 迈克尔·翁达杰称她是当今英语写作中最激动人心的诗人，苏珊·桑塔格盛赞...</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37434517/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/37455862.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">5. 涉过意识之流</div>
+    <div class="author">✍ [荷] 杜布拉夫卡·乌格雷西奇</div>
+    <div class="meta">🏠 云南人民出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 64.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>. 皮波的时间出错了。那种通用的时间。那只巨大的年龄时钟，人们都照着它来给生活上发条。就好像他在某一刻绊了一下，一不留神就掉了队。又或者是他忘了给自己上发条，又没能马上发觉。这种事很难立刻察觉。突然之间，他就发现自己站在一片空地上，而他认识的那些人正过着另一种生活…… . 他漂游在日常生活的溶液中。后来他意识到，他并不是真的在生活，而只是在追随它。于是，他从中游离出来。他想看看时不时烦扰着他的另一种生活。 . 抛开一切，潜入水下，在另一片海岸浮起来，就像是另一个人。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37455862/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/37455864.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">6. 拼凑小说</div>
+    <div class="author">✍ [荷] 杜布拉夫卡·乌格雷西奇</div>
+    <div class="meta">🏠 云南人民出版社<span class="sep"> · </span>📅 2026-11</div>
+    <div class='desc'>. 本书是杜布拉夫卡·乌格雷西奇的作品合集，收录了中篇小说《生活利齿下的什特菲察·茨韦克：一部拼凑小说》和小说集《生活是个童话》《散文的姿势》三部作品。 . 如何毁掉你的女主角？ 作者与读者的角色，颠倒过来会怎样？ 是生活在模仿文学，还是文学在模仿生活？ 陈词滥调可以用来写作吗？那别人的句子呢？ . 在一个普遍认为“文学源于生活”的环境里，“一位有胆识的作家”走上了一条所有写作者都避之不及的道路，勇敢地承担起开拓一种全新文学类型的任务： . 复制别人的故事，插入自己的文本；写下自己的故事，插入别人的文本；写下别人的文本，插入自己的故事；让别人的文本写下自己…… . 直到在故事的结尾，就像蛇衔住了尾巴，又回到了开头。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37455864/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/37488725.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">7. 漂浮</div>
+    <div class="author">✍ [加]安妮·卡森</div>
+    <div class="meta">🏠 花城出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 88.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>《漂浮》是2026 年诺贝尔文学奖得主安妮.卡森令人惊叹的天才之作，既璀璨又迷人。作品文体多元混杂，融合诗歌、散文、表演文本、文论随笔等多种创作形式。卡森贯通古今，将古希腊神话人物、西方哲学艺术大师与个人经历记忆、当代生活场景相融，围绕神话与记忆、美与失落、语言的边界等核心命题展开书写，既剖析婚姻、亲情、家庭悲剧等生活方面，又探寻文学、艺术与翻译的无限可能。全书游走于诙谐与深刻、感性与思辨之间，以碎片式文本呈现出完整的生命哲思，凭借灵动的文字、先锋的形式与极致的文字，彰显了作者大胆创新的视角与无与伦比的创造力。</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/37488725/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+<div class="book-card">
+  <div class="cover-wrap"><img src="covers/2026-11-02/38594734.jpg" alt="封面" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;no-cover&quot;>封面加载失败</div>')"></div>
+  <div class="info">
+    <div class="title">8. 我的老台北</div>
+    <div class="author">✍ 张大春</div>
+    <div class="meta">🏠 台海出版社<span class="sep"> · </span>📅 2026-11<span class="sep"> · </span>💰 58.00元<span class="sep"> · </span>📖 平装</div>
+    <div class='desc'>「当阳光照进窗子，提起笔来写一封信给我的朋友，这是最美好的事了，再多的动机，没有了。」 💙怀念一座城，其实是怀念一个人，和回不去的时光 💙华语大家张大春暌违17年散文新作 💙最私密、最辽阔的个人记忆与城市史 💙人生值得回味的，都是这种“你不会跟其他人在别的地方、别的时间发生的事” 那是幸福尚未被命名、不懂得恨的少年时光，那是一整代人的青春成长与旧日回响。 目力不济的凌晨，张大春独坐黑暗中，听窗外鸟群轮流啼叫、顺利交班。在一整片阒 黑之中，那些他以为早已被岁月冲刷无遗的生命细节，却开始明亮地一一浮现。 那是在梦中也回不去的辽宁街旧家；是每年作春联时游荡的父亲的身影；是二十岁时用过期相纸记录下的惊奇；是第一次做记者时心中激荡的正义与理想。 我们真的追上了时代的潮流，变成不一样的人了吗？</div>
+    <div class="link-row"><a href="https://book.douban.com/subject/38594734/" target="_blank" rel="noopener">🔗 豆瓣详情 →</a></div>
+  </div>
+  
+</div>
+</div>
+<div class="divider"></div>
+<div class="section">
+  <div class="section-head">
+    <h3>🌟 当日推荐</h3>
+    <span class="count">5 本精选</span>
+  </div>
+
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">1. 乡关何处</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 野夫</div>
+  <div class="rec-meta">📅 2013-01 · 🏠 浙江人民出版社</div>
+  <div class='rec-desc'>散文集，写作者对故乡、亡友、父母和那个时代的深沉追忆。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>中文非虚构写作中少见的诚实与深情。野夫写他死去的母亲、消失的友人，以及那个让人心痛的时代——没有矫饰，只有最真实的悲伤和爱，让人一读再读。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E4%B9%A1%E5%85%B3%E4%BD%95%E5%A4%84%20%E9%87%8E%E5%A4%AB" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-091">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">2. 诗经</div>
+    <div class="rec-tag">偏好推荐</div>
+  </div>
+  <div class="rec-author">✍ 佚名（先秦）</div>
+  <div class="rec-meta">📅 2015-01 · 🏠 中华书局</div>
+  <div class='rec-desc'>中国最早的诗歌总集，收录西周至春秋时期305首诗，是中国文学的源头。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;关关雎鸠，在河之洲&quot;——三千年前的爱情诗今天读来依然心动。《诗经》是中国文学的源头，但更是普通人的生活之歌——那些耕种、恋爱、思乡、战争的感受，人类从未改变。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E8%AF%97%E7%BB%8F%20%E4%BD%9A%E5%90%8D%EF%BC%88%E5%85%88%E7%A7%A6%EF%BC%89" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-098">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">3. 娱乐至死</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 尼尔·波兹曼</div>
+  <div class="rec-meta">📅 2015-01 · 🏠 中信出版社</div>
+  <div class='rec-desc'>批判电视媒介如何将严肃公共话题娱乐化，威胁民主政治。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>&quot;我们终将死于我们所热爱之物&quot;——波兹曼三十年前的预言，在今天的手机短视频时代显得如此准确。这本书会让你重新审视自己每天消耗在碎片化娱乐上的时间意味着什么。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB%20%E5%B0%BC%E5%B0%94%C2%B7%E6%B3%A2%E5%85%B9%E6%9B%BC" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-089">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">4. 不能承受的生命之轻</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 米兰·昆德拉</div>
+  <div class="rec-meta">📅 2014-08 · 🏠 上海译文出版社</div>
+  <div class='rec-desc'>以托马斯和特蕾莎的爱情为线索，探讨轻与重、灵与肉、偶然与必然。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>昆德拉让你在爱情的叙事中思考哲学。轻盈与沉重、忠诚与背叛——每一种选择都在定义你是谁。生命不能重来，这使它轻盈，也使它无法承受。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E4%B8%8D%E8%83%BD%E6%89%BF%E5%8F%97%E7%9A%84%E7%94%9F%E5%91%BD%E4%B9%8B%E8%BD%BB%20%E7%B1%B3%E5%85%B0%C2%B7%E6%98%86%E5%BE%B7%E6%8B%89" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-014">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+<div class="rec-card">
+  <div class="rec-header">
+    <div class="rec-title">5. 源氏物语</div>
+    <div class="rec-tag">随机发现</div>
+  </div>
+  <div class="rec-author">✍ 紫式部</div>
+  <div class="rec-meta">📅 2010-01 · 🏠 人民文学出版社</div>
+  <div class='rec-desc'>平安时代宫廷公子源氏的一生，以及与他相关的众多女性命运的宏大叙事。</div>
+  <div class="rec-reason"><span class="label">💡 推荐理由</span>写于一千年前的世界第一部长篇小说。紫式部以无与伦比的心理细腻描写了几十个女性的内心世界——在那个没有女性声音的时代，这本书本身就是一个奇迹。</div>
+  <a class="detail-link" href="https://search.douban.com/book/subject_search?search_text=%E6%BA%90%E6%B0%8F%E7%89%A9%E8%AF%AD%20%E7%B4%AB%E5%BC%8F%E9%83%A8" target="_blank" rel="noopener">📖 书籍详情</a>
+  <button class="heart-btn" data-id="pool-149">
+    <span class="heart">♡</span> 感兴趣
+  </button>
+</div>
+</div>
+
+<div class="footer">
+  <p>本报告由每日人文社科新书采集器自动生成</p>
+  <p>数据来源：豆瓣网 · 文学、历史、哲学、社科、文化、艺术、传记</p>
+  <p style="margin-top:4px;color:#bbb">📱 公网版：<a href="https://joeyzhengchen.github.io/booklist/" style="color:var(--accent2)">joeyzhengchen.github.io/booklist</a></p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.heart-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('liked');
+    const heart = this.querySelector('.heart');
+    if (this.classList.contains('liked')) {
+      heart.textContent = '♥';
+      this.style.borderColor = '#d44';
+      this.style.color = '#d44';
+      this.style.background = '#fef5f5';
+    } else {
+      heart.textContent = '♡';
+      this.style.borderColor = '#e0d0d0';
+      this.style.color = '#999';
+      this.style.background = '#fff';
+    }
+  });
+});
+</script>
+</body>
+</html>
