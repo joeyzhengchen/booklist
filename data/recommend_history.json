@@ -1,26 +1,6 @@
 {
   "recommended": [
     {
-      "bookId": "pool-091",
-      "date": "2026-10-18"
-    },
-    {
-      "bookId": "pool-185",
-      "date": "2026-10-18"
-    },
-    {
-      "bookId": "pool-107",
-      "date": "2026-10-18"
-    },
-    {
-      "bookId": "pool-083",
-      "date": "2026-10-18"
-    },
-    {
-      "bookId": "pool-035",
-      "date": "2026-10-18"
-    },
-    {
       "bookId": "pool-046",
       "date": "2026-10-19"
     },
@@ -299,6 +279,26 @@
     {
       "bookId": "pool-012",
       "date": "2026-11-01"
+    },
+    {
+      "bookId": "pool-091",
+      "date": "2026-11-02"
+    },
+    {
+      "bookId": "pool-098",
+      "date": "2026-11-02"
+    },
+    {
+      "bookId": "pool-089",
+      "date": "2026-11-02"
+    },
+    {
+      "bookId": "pool-014",
+      "date": "2026-11-02"
+    },
+    {
+      "bookId": "pool-149",
+      "date": "2026-11-02"
     }
   ]
 }
